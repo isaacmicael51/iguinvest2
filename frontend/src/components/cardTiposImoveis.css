@@ -1,0 +1,25 @@
+.card_tipos {
+  width: auto;
+  background-color: #fff;
+  /* box-shadow: 2px 3px 14px 0px rgba(0, 0, 0, 0.35) !important; */
+  border-radius: 6px;
+  margin: 2px;
+  border: 1px solid #eee;
+}
+
+.carousel-2 .flickity-viewport {
+  min-height: 420px;
+}
+.carousel-3 .flickity-page-dots {
+  display: none;
+}
+.carousel-3 .flickity-viewport {
+  margin-left: -5%;
+}
+.card_tipos .card_tipos__name > p {
+  color: #222222;
+  font-weight: 600;
+  padding: 20px 0 0 20px;
+  font-size: 1em;
+  text-align: left;
+}
