@@ -6,13 +6,15 @@ import SuperCardsHome from '../components/superCardHome'
 import CardTiposImoveis from '../components/cardTiposImoveis';
 import CardCidades from '../components/cidadesHome';
 import { Row, Col, Container, Button } from 'react-bootstrap';
-// import Youtube from '../components/youtubeVideos';
+import Youtube from '../components/youtubeVideos';
 
 
 
 
 
-export function Home () {
+export function Home ({data}) {
+    console.log('data', data);
+    
     return (
         <>
             <div className="hero"></div>
