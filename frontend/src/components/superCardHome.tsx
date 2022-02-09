@@ -27,7 +27,7 @@ function SuperCardsHome() {
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
-          items: 2
+          items: 1
         },
         mobile: {
           breakpoint: { max: 464, min: 0 },
@@ -54,7 +54,7 @@ function SuperCardsHome() {
             responsive={responsive}
             keyBoardControl={false}
             showDots={false}
-            arrows={false} 
+            arrows={true} 
             autoPlay={true}
 >
                 {imoveis.map((imoveis, key) => {

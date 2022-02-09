@@ -46,29 +46,19 @@ function CardTiposImoveis() {
       <>
     <Container>
         <h2 className="h2">Tipos de Imóveis para você</h2>
-            <Carousel 
-            responsive={responsive}
-            keyBoardControl={false}
-            showDots={false}
-            arrows={false} 
-            autoPlay={true}
->
+           <ul className="ul_hozintal__scroll">
                 {tipos.map((tipos, key) => {
                         return (
                             <>
-                            <div className="carousel-cell" key={key}>
-                                    <a href="#">
-                                        <div className="card_tipos">
-                                        <div className="card_tipos__name">
-                                            <p value={tipos.codigo}>{tipos.nome}</p>
-                                        </div>
-                                        </div>
-                                    </a>
-                                    </div>
+                            <a href="#" key={key}>
+                                <li className="li_scroll" value={tipos.codigo}>
+                                    {tipos.nome}
+                                </li>
+                            </a>
                             </>
                         );
                         })}
-            </Carousel>
+            </ul>
     </Container>
 
 </>

@@ -19,7 +19,21 @@
 .card_tipos .card_tipos__name > p {
   color: #222222;
   font-weight: 600;
-  padding: 20px 0 0 20px;
+  padding: 10px 0 0 10px;
   font-size: 1em;
   text-align: left;
+}
+.ul_hozintal__scroll {
+  list-style-type: none;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 20px;
+}
+
+.li_scroll {
+  display: inline;
+  padding: 14px;
+  border: 1px solid #eee;
+  margin: 8px;
+  border-radius: 6px;
 }
