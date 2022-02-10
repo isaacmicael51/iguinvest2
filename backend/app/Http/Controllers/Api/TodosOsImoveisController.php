@@ -27,7 +27,7 @@ class TodosOsImoveisController extends Controller
             $params .= $codigoTipo;
         }
 
-        $ordenacao = '"ordenacao":"valorasc"';
+        $ordenacao = '"ordenacao":"valorasc", "retornarRange:"true"';
 
         return $params .= $ordenacao;
     }

@@ -38,7 +38,7 @@ function SuperCardsHome() {
   const [imoveis, setImoveis] = useState([]);
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/ImoveisDestaqueDisponiveis")
+      .get("http://192.168.1.119:8000/api/ImoveisDestaqueDisponiveis")
       .then((response) => {
         setImoveis(response.data.lista);
       })

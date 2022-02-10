@@ -22,6 +22,9 @@ a:link {
 a:hover {
   color: #ff385c;
 }
+.btn-primary:hover {
+  background-color: #f83a5c;
+}
 .h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 2em;
@@ -54,4 +57,24 @@ a:hover {
   color: white;
   font-family: var(--fontFamily);
   border: none;
+}
+.card_1 {
+  width: auto;
+  background-color: #fff;
+  /* box-shadow: 2px 3px 14px 0px rgba(0, 0, 0, 0.35) !important; */
+  border-radius: 6px;
+  margin: 2px;
+  border: 1px solid #eee;
+}
+.card_1__name p {
+  color: #222222;
+  font-weight: 600;
+  padding: 10px 0 0 10px;
+  font-size: 1em;
+  text-align: center;
+}
+footer {
+  background-color: #222222;
+  padding: 20px;
+  margin: 2em 0 0 0;
 }
