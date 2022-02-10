@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ImoveisDestaqueDisponiveisController;
 use App\Http\Controllers\Api\TiposDeImoveisDisponiveisController;
 use App\Http\Controllers\Api\CidadesDisponiveisController;
+use App\Http\Controllers\Api\TodosOsImoveisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,4 @@ Route::get('categories', [CategoryController::class, 'index']);
 Route::get('ImoveisDestaqueDisponiveis/{codigoTipo?}/{var2?}', [ImoveisDestaqueDisponiveisController::class, 'index']);
 Route::get('tiposdeimoveisdisponiveis/', [TiposDeImoveisDisponiveisController::class, 'index']);
 Route::get('cidadesdisponiveis/', [CidadesDisponiveisController::class, 'index']);
+Route::get('imoveis-disponiveis/{page?}/{codigoTipo?}/{var2?}', [TodosOsImoveisController::class, 'index']);
