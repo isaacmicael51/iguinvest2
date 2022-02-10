@@ -12,22 +12,27 @@ export default {
                 {
                     name: 'Balneario Camboriu',
                     url: bc,
+                    codigo: 34
                 },
                 {
                     name: 'Cascavel',
                     url: cs,
+                    codigo: 5
                 },
                 {
                     name: 'Curitiba',
                     url: cwb,
+                    codigo: 9
                 },
                 {
                     name: 'Itajaí',
                     url: ita,
+                    codigo: 21
                 },
                 {
                     name: 'Itapema',
                     url: itpm,
+                    codigo: 29
                 },
             ];
         }

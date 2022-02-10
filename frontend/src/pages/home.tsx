@@ -13,7 +13,7 @@ export function Home() {
   return (
     <>
       <div className="hero">
-          <FiltroHome/>
+          <FiltroHome />
       </div>
       <SuperCardsHome />
       <div>
@@ -47,7 +47,6 @@ export function Home() {
               <iframe
                 className="embed-responsive-item"
                 src="https://www.youtube.com/embed/5CDaG_KXLUk"
-                allowfullscreen
               ></iframe>
             </div>
           </Row>
