@@ -30,7 +30,7 @@ function CardTiposImoveis() {
   const [tipos, setTipos] = useState([]);
   useEffect(() => {
     axios
-      .get("http://192.168.1.119:8000/api/tiposdeimoveisdisponiveis")
+      .get("http://127.0.0.1:8000/api/tiposdeimoveisdisponiveis")
       .then((response) => {
         setTipos(response.data.lista);
       })

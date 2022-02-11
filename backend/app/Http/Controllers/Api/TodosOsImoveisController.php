@@ -19,15 +19,16 @@ class TodosOsImoveisController extends Controller
         $finalidade = '"finalidade":"2",';
         $numeroPagina = '"numeroPagina":"' . $page . '",';
         $numeroRegistros = '"numeroRegistros":"20",';
+        $retornarRange = '"retornarRange":"true",';
 
-        $params = "$finalidade $numeroPagina $numeroRegistros";
+        $params = "$finalidade $numeroPagina $numeroRegistros $retornarRange";
         //aqui vc coloca os if q vc precisar
         if ($codigoTipo > 0) {
             $codigoTipo = '"codigoTipo":"' . $codigoTipo . '",';
             $params .= $codigoTipo;
         }
 
-        $ordenacao = '"ordenacao":"valorasc", "retornarRange:"true"';
+        $ordenacao = '"ordenacao":"valorasc"';
 
         return $params .= $ordenacao;
     }

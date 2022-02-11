@@ -28,4 +28,4 @@ Route::get('categories', [CategoryController::class, 'index']);
 Route::get('ImoveisDestaqueDisponiveis/{codigoTipo?}/{var2?}', [ImoveisDestaqueDisponiveisController::class, 'index']);
 Route::get('tiposdeimoveisdisponiveis/', [TiposDeImoveisDisponiveisController::class, 'index']);
 Route::get('cidadesdisponiveis/', [CidadesDisponiveisController::class, 'index']);
-Route::get('imoveis-disponiveis/{page?}/{codigoTipo?}/{var2?}', [TodosOsImoveisController::class, 'index']);
+Route::get('imoveisDisponiveis/{page?}/{codigoTipo?}/{var2?}', [TodosOsImoveisController::class, 'index']);

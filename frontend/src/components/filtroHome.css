@@ -127,3 +127,8 @@ input[type="range"]::-moz-range-thumb {
   background: #fff;
   border-radius: 10px;
 }
+
+.css-187mznn-MuiSlider-root {
+  padding: 8px 0 !important;
+  color: #bdbdbd !important;
+}

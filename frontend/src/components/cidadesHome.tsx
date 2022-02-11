@@ -40,7 +40,7 @@ function CardCidades() {
   }, []);
   useEffect(() => {
     axios
-      .get("http://192.168.1.119:8000/api/cidadesdisponiveis")
+      .get("http://127.0.0.1:8000/api/cidadesdisponiveis")
       .then((response) => {
         setcidades(response.data.lista);
       })
@@ -60,25 +60,23 @@ function CardCidades() {
           arrows={true}
           autoPlay={true}
         >
-          {cidades.map((cidades, key) => {
+          {
+          cidades != null &&
+          cidades.map((cidade, key) => {
+           var test = fotos.find((element) => {
+            return element.codigo === cidade.codigo;
+          })
+          if(test != null){
+            console.log("rest",test.url)
             return (
               <>
                 <div key={key}>
                   <a href="#">
                     <div className="card_1">
-                    {fotos.map((fotos,key) => {
-                          return ( <img
-                            src={fotos.url}
-                            alt=""
-                            id={cidades.nome}
-                            className="img-fluid"
-                            key={key}
-                          /> )
-                        })}
+                  <img className="img-fluid" src={test.url} alt="" key={key}/>
                       <div className="card_1__name">
-                       
-                        <a href={cidades.codigo}>
-                          <p>{cidades.nome}</p>
+                        <a href={cidade.codigo}>
+                          <p>{cidade.nome}</p>
                         </a>
                       </div>
                     </div>
@@ -86,6 +84,7 @@ function CardCidades() {
                 </div>
               </>
             );
+          }
           })}
         </Carousel>
       </Container>

@@ -21,7 +21,7 @@ function FiltroHome() {
 
   useEffect(() => {
     axios
-      .get("http://192.168.1.119:8000/api/cidadesdisponiveis")
+      .get("http://127.0.0.1:8000/api/cidadesdisponiveis")
       .then((response) => {
         setcidades(response.data.lista);
       })
@@ -33,10 +33,10 @@ function FiltroHome() {
   const [tipos, setTipos] = useState([]);
   useEffect(() => {
     axios
-      .get("http://192.168.1.119:8000/api/tiposdeimoveisdisponiveis")
+      .get("http://127.0.0.1:8000/api/tiposdeimoveisdisponiveis")
       .then((response) => {
         setTipos(response.data.lista);
-        var tiposReverse = [];
+
       })
       .catch(() => {
         console.log("Deu errado");
@@ -71,7 +71,7 @@ function FiltroHome() {
               );
             })}
           </select>
-          {/* <input type="range" className="range-style" /> */}
+
           <Box sx={{ width: 300 }}>
             <Slider
               getAriaLabel={() => "Temperature range"}
