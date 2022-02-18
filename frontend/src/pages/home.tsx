@@ -50,6 +50,10 @@ export function Home() {
               ></iframe>
             </div>
           </Row>
+
+          <Row>
+            <h3 className="mt-3">Aqui vão vir as publicações do Instagram</h3>
+          </Row>
         </Container>
       </div>
     </>

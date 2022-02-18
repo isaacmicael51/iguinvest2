@@ -1,0 +1,9 @@
+.img-cidades {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 240px;
+}
+.card-funcionario {
+  height: 360px;
+  width: auto;
+}

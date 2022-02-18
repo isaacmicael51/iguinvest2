@@ -58,7 +58,7 @@ function CardCidades() {
           keyBoardControl={false}
           showDots={false}
           arrows={true}
-          autoPlay={true}
+          autoPlay={false}
         >
           {
           cidades != null &&
@@ -73,7 +73,7 @@ function CardCidades() {
                 <div key={key}>
                   <a href="#">
                     <div className="card_1">
-                  <img className="img-fluid" src={test.url} alt="" key={key}/>
+                  <div className=" img-cidades" style={{backgroundImage: `url(${test.url})`}} alt="" key={key}></div>
                       <div className="card_1__name">
                         <a href={cidade.codigo}>
                           <p>{cidade.nome}</p>

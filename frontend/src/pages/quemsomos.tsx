@@ -48,8 +48,8 @@ export function QuemSomos() {
             showDots={false}
             arrows={true} 
             autoPlay={true}>
-                <div>
-                    <p>Aqui card funcionario</p>
+                <div className="card-funcionario">
+                  
                 </div>
             </Carousel>
         </Col>
