@@ -2,10 +2,41 @@
   background-image: url(./assets/hero-site.png);
   background-size: cover;
   width: 100%;
+  background-position: center;
   height: 600px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-around;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: space-between;
+}
+.content-title-hero {
+  text-align: center;
+  margin: 8em 0 0 0;
+}
+.title-hero {
+  color: white;
+  font-size: 4em;
+  font-weight: 700;
+}
+.subtitle-hero {
+  color: white;
+  font-size: 2em;
+  font-weight: 500;
+}
+.hr {
+  height: 4px !important;
+  width: 400px;
+  color: white;
+  padding: 0;
+  opacity: 1;
+  border-radius: 8px;
+  margin: 4px auto;
+  text-align: center;
+}
+.carousel-super-destaque {
+  padding: 2px;
 }
 .row_content_logo__nossa_historia {
   padding: 0 0 1em 6em;
@@ -22,6 +53,7 @@
 .logo_nossa__historia {
   padding: 2em 1em;
   width: 200px;
+  margin: 0 0 0 14.4em;
 }
 .text_nossa__historia {
   padding: 1em;

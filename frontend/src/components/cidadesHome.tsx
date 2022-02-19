@@ -57,8 +57,9 @@ function CardCidades() {
           responsive={responsive}
           keyBoardControl={false}
           showDots={false}
-          arrows={true}
+          arrows={false}
           autoPlay={false}
+          className="card-cidades"
         >
           {
           cidades != null &&

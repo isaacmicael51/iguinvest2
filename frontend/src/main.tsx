@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'
 
+import {Ripple} from 'react-preloaders';
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    <Ripple />
   </React.StrictMode>,
   document.getElementById('root')
 )

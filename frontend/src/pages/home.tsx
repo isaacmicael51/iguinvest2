@@ -7,13 +7,19 @@ import CardTiposImoveis from "../components/cardTiposImoveis";
 import CardCidades from "../components/cidadesHome";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import FiltroHome from "../components/filtroHome";
+import { Divider } from "@mui/material";
 // import Youtube from '../components/youtubeVideos';
 
 export function Home() {
   return (
     <>
       <div className="hero">
-          <FiltroHome />
+        <div className="content-title-hero">
+          <h1 className="title-hero">Iguasu Invest</h1>
+          <hr className="hr" />
+          <h2 className="subtitle-hero">A arte de viver bem</h2>
+        </div>
+        <FiltroHome />
       </div>
       <SuperCardsHome />
       <div>
@@ -21,7 +27,11 @@ export function Home() {
         <CardCidades />
         <Container fluid className="container_nossa___historia">
           <Row className="mt-4">
-            <Col xs={4} md={5} className="align-content-center row_content_logo__nossa_historia">
+            <Col
+              xs={4}
+              md={5}
+              className="align-content-center row_content_logo__nossa_historia"
+            >
               <img
                 src={logo}
                 className="img-fluid logo_nossa__historia"
@@ -40,9 +50,9 @@ export function Home() {
             </Col>
           </Row>
         </Container>
-        <Container  className="youtube_section">
+        <Container className="youtube_section">
           <Row>
-              <h3>Acompanhe nosso canal no Youtube </h3>
+            <h3>Acompanhe nosso canal no Youtube </h3>
             <div className="embed-responsive embed-responsive-16by9 align-content-center">
               <iframe
                 className="embed-responsive-item"
