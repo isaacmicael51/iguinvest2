@@ -3,10 +3,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import "./cidadesHome.css";
 
-import bc from "../pages/assets/bc.jpg";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import json from "../components/jsonFile";
+import json from "./jsonImgCidades";
 
 function CardCidades() {
   const responsive = {
