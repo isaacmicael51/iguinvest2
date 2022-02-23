@@ -57,7 +57,7 @@ export function QuemSomos() {
                 </div>
               </Row>
             </Container>
-            <h2 className="text-center mt-5">Nós fazemos a Iguassu Invest</h2>
+            <h2 className="text-center mt-5 h2">Nós fazemos a Iguassu Invest</h2>
             <Carousel
               responsive={responsive}
               keyBoardControl={false}
@@ -70,7 +70,6 @@ export function QuemSomos() {
                   <Card className="card" style={{backgroundImage: `url(${bgCard})`}} key={key}>
                     <div className="img-funcionarios" style={{backgroundImage: `url(${funcionario.url})`}}></div>
                     <h3>{funcionario.name}</h3>
-                    <Divider className="mt-3" />
                     <p className="desc-funcionario">{funcionario.desc}</p>
                   </Card>
                 );
@@ -78,11 +77,11 @@ export function QuemSomos() {
             </Carousel>
           </Col>
         </Row>
-        <Row>
+        <Row className="quem-somos-section">
           <Col>
-            <h3>Quem Somos</h3>
+            <h2 className="h2">Quem Somos</h2>
             <p>
-              A Iguassu Invest atua no Mercado desde 2012 e oferece assessoria
+              A<b> Iguassu Invest</b> atua no Mercado desde 2012 e oferece assessoria
               imobiliária na compra e venda de imóveis em Foz do Iguaçu e
               região. Oferecemos um serviço inovador, buscando sempre
               identificar as necessidades de nossos clientes, prezando pela

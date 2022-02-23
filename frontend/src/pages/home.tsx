@@ -63,6 +63,7 @@ export function Home() {
 
           <Row>
             <h3 className="mt-3">Aqui vão vir as publicações do Instagram</h3>
+            
           </Row>
         </Container>
       </div>
