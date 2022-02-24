@@ -74,7 +74,7 @@ function CardCidades() {
                 <div key={key}>
                   <a href="#">
                     <div className="card_1">
-                  <div className=" img-cidades" style={{backgroundImage: `url(${test.url})`}} alt="" key={key}></div>
+                  <div className=" img-cidades" style={{backgroundImage: `url(${test.url})`}} key={key}></div>
                       <div className="card_1__name">
                         <a href={cidade.codigo}>
                           <p>{cidade.nome}</p>
