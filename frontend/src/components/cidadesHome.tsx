@@ -41,7 +41,7 @@ function CardCidades() {
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/cidadesdisponiveis")
-      .then((response) => {
+      .then((response:any) => {
         setcidades(response.data.lista);
       })
       .catch(() => {

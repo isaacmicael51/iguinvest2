@@ -39,7 +39,7 @@ function SuperCardsHome() {
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/ImoveisDestaqueDisponiveis")
-      .then((response) => {
+      .then((response:any) => {
         setImoveis(response.data.lista);
       })
       .catch(() => {

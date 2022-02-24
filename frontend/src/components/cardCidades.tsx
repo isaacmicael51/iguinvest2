@@ -33,7 +33,7 @@ function CardTiposImoveis() {
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/tiposdeimoveisdisponiveis")
-      .then((response) => {
+      .then((response:any) => {
         setTipos(response.data.lista);
       })
       .catch(() => {
