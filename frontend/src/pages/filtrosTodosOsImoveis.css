@@ -1,0 +1,14 @@
+.filter-all {
+  margin: 2em;
+}
+.container-filtros-all {
+  display: flex;
+  border: 1px solid #eee;
+  padding: 1em;
+  border-radius: 12px;
+}
+.filter-all select {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 6px;
+}
