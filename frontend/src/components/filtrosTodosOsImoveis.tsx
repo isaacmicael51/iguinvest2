@@ -8,6 +8,7 @@ function FiltrosTodosImoveis() {
   const [tipos, setTipos] = useState([]);
   const [cidades, setcidades] = useState([]);
 
+
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/tiposdeimoveisdisponiveis")
@@ -30,12 +31,24 @@ function FiltrosTodosImoveis() {
       });
   }, []);
 
+  const selected = 1;
   return (
     <>
       <Container className="filter-all">
         <Row>
           <Col>
             <form action="#" className="container-filtros-all">
+
+              <select className="tipos-filtro">
+                <option>Cidade</option>
+                {cidades.map((cidade, key) => {
+                  return (
+                    <option value={cidade.codigo}  selected={cidade.codigo === selected} key={key}>
+                      {cidade.nome}
+                    </option>
+                  );
+                })}
+              </select>
               <select className="tipos-filtro">
                 <option>Tipo de imóvel</option>
                 {tipos.map((tipo, key) => {
@@ -46,23 +59,13 @@ function FiltrosTodosImoveis() {
                   );
                 })}
               </select>
-
-              <select className="tipos-filtro">
-                <option>Cidade</option>
-                {cidades.map((cidade, key) => {
-                  return (
-                    <option value={cidade.codigo} key={key}>
-                      {cidade.nome}
-                    </option>
-                  );
-                })}
-              </select>
-
-              
+                <input className="tipos-filtro" name="valorMinimo" type="number" placeholder="Valor Minimo"/>
+                <input className="tipos-filtro" name="valorMaximo" type="number" placeholder="Valor Maximo"/>
             </form>
           </Col>
         </Row>
       </Container>
+      
     </>
   );
 }
