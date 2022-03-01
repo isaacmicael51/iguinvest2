@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FiltrosTodosImoveis from "../components/filtrosTodosOsImoveis";
-import ResultBusca from "../components/resultBusca";
+import ResultBusca  from "../components/ResultBusca";
 
 
 export function TodosOsImoveis() {

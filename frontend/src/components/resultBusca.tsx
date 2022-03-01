@@ -103,6 +103,8 @@ function ResultBusca() {
             </>
           );
         })}
+
+        <button>Buscar</button>
         </Row>
       </Container>
     </>
