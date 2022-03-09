@@ -18,7 +18,8 @@
     "react-flickity-component": "^3.6.2",
     "react-multi-carousel": "^2.6.5",
     "react-preloaders": "^3.0.3",
-    "react-router-dom": "^6.2.1"
+    "react-router-dom": "^6.2.1",
+    "react-select": "^5.2.2"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import "../pages/filtrosTodosOsImoveis.css";
+import './filtrosTodosOsimoveis.css'
 import { Container, Row, Col} from "react-bootstrap";
 
 function FiltrosTodosImoveis() {

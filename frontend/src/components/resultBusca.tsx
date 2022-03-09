@@ -14,8 +14,13 @@ function ResultBusca() {
   const [imoveis, setImoveis] = useState([]);
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/imoveisDisponiveis")
+      .get("http://127.0.0.1:8000/api/imoveisDisponiveis/", {
+        params: {
+          pagina: 3
+        }
+      })
       .then((response: any) => {
+        console.log('aqui o biricutico', response)
         setImoveis(response.data.lista);
       })
       .catch(() => {
@@ -103,8 +108,6 @@ function ResultBusca() {
             </>
           );
         })}
-
-        <button>Buscar</button>
         </Row>
       </Container>
     </>
