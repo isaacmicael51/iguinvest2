@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+
 import axios from "axios";
 import "./resultBusca.css";
 
@@ -11,22 +14,48 @@ import IconLocation from "../pages/assets/icons/icon-location-on.svg";
 import IconShower from "../pages/assets/icons/icon-shower.svg";
 
 function ResultBusca() {
-  const [imoveis, setImoveis] = useState([]);
+  const [quantidade, setQuantidade] = useState([]);
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/imoveisDisponiveis/", {
-        params: {
-          pagina: 3
-        }
-      })
+      .get("http://127.0.0.1:8001/api/imoveisDisponiveis/")
       .then((response: any) => {
-        console.log('aqui o biricutico', response)
-        setImoveis(response.data.lista);
+        setQuantidade(response.data.quantidade);
       })
       .catch(() => {
-        console.log("Deu errado");
+        console.log("Deu errado pagination");
       });
-  }, []);
+     
+  }, []); 
+
+  let quantidadeImoveis:any = quantidade;
+  let paginas = Math.round(quantidadeImoveis/20);
+  console.log(paginas);
+  
+ 
+  
+  const [imoveis, setImoveis] = useState([]);
+  // getImoveis(1);
+  let page;
+  async function getImoveis(page) {
+    try {
+      const res = await axios.get(`http://127.0.0.1:8001/api/imoveisDisponiveis/${page}`)
+      console.log(res);
+      setImoveis(res.data.lista);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function handlePagination (event) {
+    page = event.currentTarget.textContent;
+    console.log(event.currentTarget.textContent);
+    getImoveis(page);
+    window.scrollTo(0, 0);
+
+    }
+
+
+
   return (
     <>
       <Container>
@@ -108,6 +137,15 @@ function ResultBusca() {
             </>
           );
         })}
+        </Row>
+      </Container>
+      <Container className="mt-3 align-center">
+        <Row>
+          <Col>
+            <Stack spacing={2}>
+              <Pagination count={paginas} onChange={handlePagination} shape="rounded" />
+            </Stack>
+          </Col>
         </Row>
       </Container>
     </>
