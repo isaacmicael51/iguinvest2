@@ -80,6 +80,7 @@ function FiltroHome() {
               valueLabelDisplay="auto"
               getAriaValueText={valuetext}
             />
+            
           </Box>
           <button
             className="form_busca__button ml-2"

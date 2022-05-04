@@ -13,7 +13,7 @@ import IconCar from "../pages/assets/icons/icon-car.svg";
 import IconLocation from "../pages/assets/icons/icon-location-on.svg";
 import IconShower from "../pages/assets/icons/icon-shower.svg";
 
-function ResultBusca() {
+function ResultBusca({cidade, tipo}) {
   // pega a quantidade de imoveis e calcula a quatidade de páginas
   const [quantidade, setQuantidade] = useState([]);
   useEffect(() => {
@@ -31,32 +31,57 @@ function ResultBusca() {
   let paginas = Math.round(quantidadeImoveis / 20);
 
 
-  const [imoveis, setImoveis] = useState([1]);
+  const [imoveis, setImoveis] = useState([]);
   let page: any;
   page = 1;
 
 
   page = 1;
-  async function getImoveis(page) {
+  async function getImoveis(cidade, tipo, page) {
     try {
-      const res = await axios.get(
-        `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}`
-      );
-      console.log(res);
-      setImoveis(res.data.lista);
+      // -RAUL- VERIFICA SE CIDADE E TIPO ESTAO VAZIOS
+      if(cidade && tipo === '') {
+        // -RAUL- SE OS 2 ESTIVEREM VAZIOS, BUSCA TODOS OS IMOVEIS
+        let res = await axios.get(
+          `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}`
+        );
+        console.log(res);
+        setImoveis(res.data.lista);
+      } else if(cidade === '' && tipo) {
+        // -RAUL- SE APENAS CIDADE ESTIVER VAZIA, PROCURA IMOVEIS PELO TIPO
+        let res = await axios.get(
+          `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}/${tipo}`
+        );
+        console.log(res);
+        setImoveis(res.data.lista);
+      } else if(cidade && tipo === ''){
+        // -RAUL- SE TIPO ESTIVER VAZIO, BUSCA IMOVEIS PELA CIDADE
+        let res = await axios.get(
+          `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}/${cidade}`
+        );
+        console.log(res);
+        setImoveis(res.data.lista);
+      } else {
+        // -RAUL- SE AMBOS ESTIVEREM PREENCHIDOS, BUSCA IMOVEIS POR TIPO E CIDADE
+        let res = await axios.get(
+          `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}/${tipo}/${cidade}`
+        );
+        console.log(res);
+        setImoveis(res.data.lista);
+      }
     } catch (error) {
       console.error(error);
     }
   }
 
   useEffect(() => {
-    getImoveis(page);
-  }, [])
+    getImoveis(cidade, tipo, page);
+  }, [cidade, tipo])
 
   // Muda a página quando clica no botão da paginação e scrolla até o topo
   function handlePagination(event) {
     page = event.currentTarget.textContent;
-    getImoveis(page);
+    getImoveis(cidade, tipo, page);
     window.scrollTo(0, 0);
   }
 
@@ -73,7 +98,7 @@ function ResultBusca() {
                       <div
                         className="card-imoveis_img__top"
                         style={{
-                          backgroundImage: `url(${imoveis.urlfotoprincipal})`,
+                          backgroundImage: `url(${imoveis.urlfotoprincipal})`
                         }}
                       ></div>
                       <div className="card-imoveis_body">
