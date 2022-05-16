@@ -15,7 +15,7 @@
 
 .card-imoveis_card__text,
 p {
-  font-family: Interop;
+  font-family: --(font-family);
   font-weight: 500;
   font-size: 13px;
   text-align: left;
