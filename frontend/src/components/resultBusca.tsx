@@ -12,9 +12,13 @@ import IconBed from "../pages/assets/icons/icon-bed.svg";
 import IconCar from "../pages/assets/icons/icon-car.svg";
 import IconLocation from "../pages/assets/icons/icon-location-on.svg";
 import IconShower from "../pages/assets/icons/icon-shower.svg";
+import { useNavigate } from "react-router-dom";
 
-function ResultBusca({cidade, tipo}) {
+function ResultBusca({ cidade, tipo }) {
   // pega a quantidade de imoveis e calcula a quatidade de páginas
+
+  const navigate = useNavigate();
+
   const [quantidade, setQuantidade] = useState([]);
   useEffect(() => {
     axios
@@ -30,31 +34,29 @@ function ResultBusca({cidade, tipo}) {
   let quantidadeImoveis: any = quantidade;
   let paginas = Math.round(quantidadeImoveis / 20);
 
-
   const [imoveis, setImoveis] = useState([]);
   let page: any;
   page = 1;
-
 
   page = 1;
   async function getImoveis(cidade, tipo, page) {
     try {
       // -RAUL- VERIFICA SE CIDADE E TIPO ESTAO VAZIOS
-      if(cidade && tipo === '') {
+      if (cidade && tipo === "") {
         // -RAUL- SE OS 2 ESTIVEREM VAZIOS, BUSCA TODOS OS IMOVEIS
         let res = await axios.get(
           `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}`
         );
         console.log(res);
         setImoveis(res.data.lista);
-      } else if(cidade === '' && tipo) {
+      } else if (cidade === "" && tipo) {
         // -RAUL- SE APENAS CIDADE ESTIVER VAZIA, PROCURA IMOVEIS PELO TIPO
         let res = await axios.get(
           `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}/${tipo}`
         );
         console.log(res);
         setImoveis(res.data.lista);
-      } else if(cidade && tipo === ''){
+      } else if (cidade && tipo === "") {
         // -RAUL- SE TIPO ESTIVER VAZIO, BUSCA IMOVEIS PELA CIDADE
         let res = await axios.get(
           `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}/${cidade}`
@@ -76,7 +78,7 @@ function ResultBusca({cidade, tipo}) {
 
   useEffect(() => {
     getImoveis(cidade, tipo, page);
-  }, [cidade, tipo])
+  }, [cidade, tipo]);
 
   // Muda a página quando clica no botão da paginação e scrolla até o topo
   function handlePagination(event) {
@@ -85,11 +87,16 @@ function ResultBusca({cidade, tipo}) {
     window.scrollTo(0, 0);
   }
 
+  function handleDetails(imovel: any) {
+    console.log(imovel)
+    navigate(`/todososimoveis/${imovel.codigo}`, {state: imovel});
+  }
+
   return (
     <>
       <Container>
         <Row>
-          {imoveis.map((imoveis, key) => {
+          {imoveis.map((imovel, key) => {
             return (
               <>
                 <Col md="4" className="mt-4">
@@ -98,12 +105,12 @@ function ResultBusca({cidade, tipo}) {
                       <div
                         className="card-imoveis_img__top"
                         style={{
-                          backgroundImage: `url(${imoveis.urlfotoprincipal})`
+                          backgroundImage: `url(${imovel.urlfotoprincipal})`,
                         }}
                       ></div>
                       <div className="card-imoveis_body">
                         <h3 className="card-imoveis_card__title">
-                          {imoveis.titulo}
+                          {imovel.titulo}
                         </h3>
                         <div className="card-imoveis_text">
                           <p>
@@ -111,45 +118,48 @@ function ResultBusca({cidade, tipo}) {
                               src={IconLocation}
                               className="img-responsive card-imoveis_icon__ubication"
                             />
-                            {imoveis.endereco}
+                            {imovel.endereco}
                           </p>
                           <p>
                             <img
                               src={IconShower}
                               className="card-imoveis_icon__left img-responsive"
                             />
-                            {imoveis.numerobanhos} banheiros
+                            {imovel.numerobanhos} banheiros
                             <img
                               src={IconShower}
                               className="card-imoveis_icon__shower img-responsive"
                             />
-                            {imoveis.numerosuites} suites
+                            {imovel.numerosuites} suites
                             <img
                               src={IconBed}
                               className="card-imoveis_icon__bed img-responsive"
                             />
-                            {imoveis.numeroquartos} quartos
+                            {imovel.numeroquartos} quartos
                           </p>
                           <p>
                             <img
                               src={IconCar}
                               className="card-imoveis_icon__left img-responsive"
                             />
-                            {imoveis.numerovagas} vagas
+                            {imovel.numerovagas} vagas
                             <img
                               src={iconArea}
                               className="card-imoveis_icon__shower img-responsive"
                             />
-                            {imoveis.arealote} m² de lote
+                            {imovel.arealote} m² de lote
                             <img
                               src={iconArea}
                               className="card-imoveis_icon__bed img-responsive"
                             />
-                            {imoveis.areaprincipal} m² construção
+                            {imovel.areaprincipal} m² construção
                           </p>
                         </div>
                         <div className="d-flex justify-content-between">
-                          <button className="button-more_info">
+                          <button
+                            className="button-more_info"
+                            onClick={() => handleDetails(imovel)}
+                          >
                             mais detalhes
                           </button>
                           <a

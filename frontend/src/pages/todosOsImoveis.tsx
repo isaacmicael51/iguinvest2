@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import '../components/filtroHome.css';
+import "./todosOsimoveis.css";
 import axios from "axios";
+import { Loader } from 'rsuite';
+
 
 
 import ResultBusca  from "../components/resultBusca";
+
 
 
 
@@ -17,12 +20,16 @@ export function TodosOsImoveis() {
     const [tipoSelecionado, setTipoSelecionado] = useState(String);
     const [cidadeSelecionada, setCidadeSelecionada] = useState(String);
 
+    const instance = <Loader />;
+
+    
     //BUSCA CIDADES E TIPOS DEIMOVEIS DISPONIVEIS
     useEffect(() => {
         axios
           .get("http://127.0.0.1:8000/api/tiposdeimoveisdisponiveis")
           .then((response: any) => {
             setTipos(response.data.lista);
+            <Loader />
           })
           .catch(() => {
             console.log("Deu errado");
@@ -43,6 +50,8 @@ export function TodosOsImoveis() {
 
     console.log('CIDADE SELECIONADA ===', cidadeSelecionada);
     console.log('TIPO SELECIONADO ===', tipoSelecionado);
+
+    
 
     return (
        <>
