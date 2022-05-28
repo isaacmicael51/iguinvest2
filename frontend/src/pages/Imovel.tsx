@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react'
 import { useLocation, useParams } from "react-router-dom"
 
-export function Imovel (props) {
+export function Imovel(props) {
 
     const location = useLocation();
     const params = useParams();

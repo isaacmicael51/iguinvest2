@@ -22,7 +22,7 @@ function ResultBusca({ cidade, tipo }) {
   const [quantidade, setQuantidade] = useState([]);
   useEffect(() => {
     axios
-      .get("https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/")
+      .get("https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis")
       .then((response: any) => {
         setQuantidade(response.data.quantidade);
       })
