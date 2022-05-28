@@ -20,23 +20,16 @@ function ResultBusca({ cidade, tipo }) {
   const navigate = useNavigate();
 
   const [quantidade, setQuantidade] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis")
-      .then((response: any) => {
-        setQuantidade(response.data.quantidade);
-      })
-      .catch(() => {
-        console.log("Deu errado - pagination");
-      });
-  }, []);
-  //Calculo quantidade de páginas
   let quantidadeImoveis: any = quantidade;
-  let paginas = Math.round(quantidadeImoveis / 20);
+  let paginas = quantidade > 20 ? Math.round(quantidadeImoveis / 20) : quantidade;
 
   const [imoveis, setImoveis] = useState([]);
+
   let page: any;
+
   page = 1;
+
+
   async function getImoveis(cidade, tipo, page) {
     try {
       if (!cidade && !tipo) {
@@ -44,21 +37,26 @@ function ResultBusca({ cidade, tipo }) {
           `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/${page}`
         );
         setImoveis(res.data.lista);
+        setQuantidade(res.data.quantidade);
       } else if (cidade === "" && tipo) {
         let res = await axios.get(
           `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/${page}/${tipo}`
         );
         setImoveis(res.data.lista);
-      } else if (cidade && tipo === "") {
+        setQuantidade(res.data.quantidade);
+      } else if (cidade && !tipo) {
         let res = await axios.get(
-          `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/${page}/${cidade}`
+          `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/${page}/0/${cidade}`
         );
         setImoveis(res.data.lista);
-      } else {
+        setQuantidade(res.data.quantidade);
+      }
+      else {
         let res = await axios.get(
           `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/${page}/${tipo}/${cidade}`
         );
         setImoveis(res.data.lista);
+        setQuantidade(res.data.quantidade);
       }
     } catch (error) {
       console.error(error);
@@ -85,7 +83,7 @@ function ResultBusca({ cidade, tipo }) {
     <>
       <Container>
         <Row>
-          {imoveis.map((imovel, key) => (
+          {imoveis.length > 0 ? imoveis.map((imovel, key) => (
             <Col xs="12" sm="12" md="6" lg="4" className="mt-4" key={`imovel:${key}`}>
               <div className="carousel-super-destaque">
                 <div className="card-imoveis">
@@ -153,7 +151,7 @@ function ResultBusca({ cidade, tipo }) {
                       >
                         mais detalhes
                       </button>
-                      <div style={{width: 10}} />
+                      <div style={{ width: 10 }} />
                       <a
                         href="https://api.whatsapp.com/send?phone=5545998171516&text=Ol%C3%A1,%20tenho%20interesse%20neste%20im%C3%B3vel,%20c%C3%B3digo%20776%20Aguardo%20breve%20o%20contato.%20Obrigado!."
                         style={{ width: '100%', maxWidth: '145px' }}
@@ -167,9 +165,14 @@ function ResultBusca({ cidade, tipo }) {
                 </div>
               </div>
             </Col>
-          ))}
+          )) : (
+            <div>
+              <h6>Nenhum imóvel encontrado com este(s) filtro(s)</h6>
+            </div>
+          )}
         </Row>
       </Container>
+      {quantidade > 20 && (
       <Container className="mt-3 align-center">
         <Row>
           <Col>
@@ -183,6 +186,7 @@ function ResultBusca({ cidade, tipo }) {
           </Col>
         </Row>
       </Container>
+      )}
     </>
   );
 }

@@ -5,8 +5,12 @@ import "./cardTiposImoveis.css";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link, useNavigate } from "react-router-dom";
 
 function CardTiposImoveis() {
+
+  const navigate = useNavigate();
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -31,7 +35,7 @@ function CardTiposImoveis() {
   useEffect(() => {
     axios
       .get("https://sleepy-bayou-22688.herokuapp.com/api/tiposdeimoveisdisponiveis")
-      .then((response:any) => {
+      .then((response: any) => {
         setTipos(response.data.lista);
       })
       .catch(() => {
@@ -43,15 +47,17 @@ function CardTiposImoveis() {
       <Container>
         <h2 className="h2">Tipos de Imóveis para você</h2>
         <ul className="ul_hozintal__scroll">
-          {tipos.map((tipos, key) => {
+          {tipos.map((tipo, key) => {
             return (
-              <>
-                <a href="#" key={key}>
-                  <li className="li_scroll" value={tipos.codigo}>
-                    {tipos.nome}
-                  </li>
-                </a>
-              </>
+              <li
+                key={`tipo:${key}`}
+                className="li_scroll"
+                value={tipo.codigo}
+                onClick={() => navigate('/todososimoveis', { state: { tipo } })}
+                style={{ cursor: 'pointer' }}
+              >
+                {tipo.nome}
+              </li>
             );
           })}
         </ul>
