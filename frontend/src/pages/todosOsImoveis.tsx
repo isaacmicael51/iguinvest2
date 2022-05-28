@@ -48,11 +48,6 @@ export function TodosOsImoveis() {
       }, []);
     //BUSCA CIDADES E TIPOS DEIMOVEIS DISPONIVEIS
 
-    console.log('CIDADE SELECIONADA ===', cidadeSelecionada);
-    console.log('TIPO SELECIONADO ===', tipoSelecionado);
-
-    
-
     return (
        <>
         <Container className="filter-all">
@@ -64,7 +59,7 @@ export function TodosOsImoveis() {
                     <option>Cidade</option>
                     {cidades.map((cidade, key) => {
                     return (
-                        <option value={cidade.codigo} key={key}>
+                        <option value={cidade.codigo} key={`cidade:${key}`}>
                         {cidade.nome}
                         </option>
                     );
@@ -74,7 +69,7 @@ export function TodosOsImoveis() {
                     <option>Tipo de imóvel</option>
                     {tipos.map((tipo, key) => {
                     return (
-                        <option value={tipo.codigo} key={key}>
+                        <option value={tipo.codigo} key={`tipo:${key}`}>
                         {tipo.nome}
                         </option>
                     );
