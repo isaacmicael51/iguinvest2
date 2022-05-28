@@ -26,7 +26,7 @@ export function TodosOsImoveis() {
     //BUSCA CIDADES E TIPOS DEIMOVEIS DISPONIVEIS
     useEffect(() => {
         axios
-          .get("http://127.0.0.1:8000/api/tiposdeimoveisdisponiveis")
+          .get("https://sleepy-bayou-22688.herokuapp.com/api/tiposdeimoveisdisponiveis")
           .then((response: any) => {
             setTipos(response.data.lista);
             <Loader />
@@ -38,7 +38,7 @@ export function TodosOsImoveis() {
     
       useEffect(() => {
         axios
-          .get("http://127.0.0.1:8000/api/cidadesdisponiveis")
+          .get("https://sleepy-bayou-22688.herokuapp.com/api/cidadesdisponiveis")
           .then((response: any) => {
             setcidades(response.data.lista);
           })

@@ -38,7 +38,7 @@ function SuperCardsHome() {
   const [imoveis, setImoveis] = useState([]);
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/ImoveisDestaqueDisponiveis")
+      .get("https://sleepy-bayou-22688.herokuapp.com/api/ImoveisDestaqueDisponiveis")
       .then((response:any) => {
         setImoveis(response.data.lista);
       })

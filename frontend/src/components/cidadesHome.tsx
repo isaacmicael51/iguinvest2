@@ -40,7 +40,7 @@ function CardCidades() {
   }, []);
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/cidadesdisponiveis")
+      .get("https://sleepy-bayou-22688.herokuapp.com/api/cidadesdisponiveis")
       .then((response:any) => {
         setcidades(response.data.lista);
       })

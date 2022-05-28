@@ -22,7 +22,7 @@ function ResultBusca({ cidade, tipo }) {
   const [quantidade, setQuantidade] = useState([]);
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/imoveisDisponiveis/")
+      .get("https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/")
       .then((response: any) => {
         setQuantidade(response.data.quantidade);
       })
@@ -45,28 +45,28 @@ function ResultBusca({ cidade, tipo }) {
       if (cidade && tipo === "") {
         // -RAUL- SE OS 2 ESTIVEREM VAZIOS, BUSCA TODOS OS IMOVEIS
         let res = await axios.get(
-          `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}`
+          `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/${page}`
         );
         console.log(res);
         setImoveis(res.data.lista);
       } else if (cidade === "" && tipo) {
         // -RAUL- SE APENAS CIDADE ESTIVER VAZIA, PROCURA IMOVEIS PELO TIPO
         let res = await axios.get(
-          `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}/${tipo}`
+          `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/${page}/${tipo}`
         );
         console.log(res);
         setImoveis(res.data.lista);
       } else if (cidade && tipo === "") {
         // -RAUL- SE TIPO ESTIVER VAZIO, BUSCA IMOVEIS PELA CIDADE
         let res = await axios.get(
-          `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}/${cidade}`
+          `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/${page}/${cidade}`
         );
         console.log(res);
         setImoveis(res.data.lista);
       } else {
         // -RAUL- SE AMBOS ESTIVEREM PREENCHIDOS, BUSCA IMOVEIS POR TIPO E CIDADE
         let res = await axios.get(
-          `http://127.0.0.1:8000/api/imoveisDisponiveis/${page}/${tipo}/${cidade}`
+          `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/${page}/${tipo}/${cidade}`
         );
         console.log(res);
         setImoveis(res.data.lista);
