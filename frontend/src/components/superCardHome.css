@@ -70,9 +70,11 @@ p {
   background: #fff;
   border: 1px solid #e2e2e2;
   border-radius: 8px;
-  padding: 4px 12px;
+  padding: 4px 6px;
   color: #222222;
   font-size: 14px;
+  max-width: 145px;
+  width: 100%;
 }
 
 .button-more_agend {
@@ -81,6 +83,6 @@ p {
   background: #ff385c;
   border: 1px solid #ff385c;
   color: #fff !important;
-  padding: 4px 12px;
+  padding: 4px 6px;
   font-size: 14px;
 }

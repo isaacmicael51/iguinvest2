@@ -97,9 +97,9 @@ function ResultBusca({ cidade, tipo }) {
                   ></div>
                   <div className="card-imoveis_body">
                     <div className="card-imoveis_body_title">
-                    <h3 className="card-imoveis_card__title">
-                      {imovel.titulo}
-                    </h3>
+                      <h3 className="card-imoveis_card__title">
+                        {imovel.titulo}
+                      </h3>
                     </div>
                     <div className="card-imoveis_text">
                       <p>
@@ -127,23 +127,23 @@ function ResultBusca({ cidade, tipo }) {
                         {imovel.numeroquartos} quartos
                       </p>
                       <div className="card-imoveis_area">
-                      <p>
-                        <img
-                          src={IconCar}
-                          className="card-imoveis_icon__left img-responsive"
-                        />
-                        {imovel.numerovagas} vagas
-                        <img
-                          src={iconArea}
-                          className="card-imoveis_icon__shower img-responsive"
-                        />
-                        {imovel.arealote} m² de lote
-                        <img
-                          src={iconArea}
-                          className="card-imoveis_icon__bed img-responsive"
-                        />
-                        {imovel.areaprincipal} m² construção
-                      </p>
+                        <p>
+                          <img
+                            src={IconCar}
+                            className="card-imoveis_icon__left img-responsive"
+                          />
+                          {imovel.numerovagas} vagas
+                          <img
+                            src={iconArea}
+                            className="card-imoveis_icon__shower img-responsive"
+                          />
+                          {imovel.arealote} m² de lote
+                          <img
+                            src={iconArea}
+                            className="card-imoveis_icon__bed img-responsive"
+                          />
+                          {imovel.areaprincipal} m² construção
+                        </p>
                       </div>
                     </div>
                     <div style={{ marginTop: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -153,10 +153,12 @@ function ResultBusca({ cidade, tipo }) {
                       >
                         mais detalhes
                       </button>
+                      <div style={{width: 10}} />
                       <a
                         href="https://api.whatsapp.com/send?phone=5545998171516&text=Ol%C3%A1,%20tenho%20interesse%20neste%20im%C3%B3vel,%20c%C3%B3digo%20776%20Aguardo%20breve%20o%20contato.%20Obrigado!."
+                        style={{ width: '100%', maxWidth: '145px' }}
                       >
-                        <button className="button-more_agend">
+                        <button className="button-more_agend" style={{ width: '100%', maxWidth: '145px' }}>
                           agendar visita
                         </button>
                       </a>
