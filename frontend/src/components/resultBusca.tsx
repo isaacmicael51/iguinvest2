@@ -86,7 +86,7 @@ function ResultBusca({ cidade, tipo }) {
       <Container>
         <Row>
           {imoveis.map((imovel, key) => (
-            <Col md="4" className="mt-4" key={`imovel:${key}`}>
+            <Col xs="12" sm="12" md="6" lg="4" className="mt-4" key={`imovel:${key}`}>
               <div className="carousel-super-destaque">
                 <div className="card-imoveis">
                   <div
@@ -96,9 +96,11 @@ function ResultBusca({ cidade, tipo }) {
                     }}
                   ></div>
                   <div className="card-imoveis_body">
+                    <div className="card-imoveis_body_title">
                     <h3 className="card-imoveis_card__title">
                       {imovel.titulo}
                     </h3>
+                    </div>
                     <div className="card-imoveis_text">
                       <p>
                         <img
@@ -124,6 +126,7 @@ function ResultBusca({ cidade, tipo }) {
                         />
                         {imovel.numeroquartos} quartos
                       </p>
+                      <div className="card-imoveis_area">
                       <p>
                         <img
                           src={IconCar}
@@ -141,8 +144,9 @@ function ResultBusca({ cidade, tipo }) {
                         />
                         {imovel.areaprincipal} m² construção
                       </p>
+                      </div>
                     </div>
-                    <div className="d-flex justify-content-between">
+                    <div style={{ marginTop: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                       <button
                         className="button-more_info"
                         onClick={() => handleDetails(imovel)}
@@ -151,9 +155,10 @@ function ResultBusca({ cidade, tipo }) {
                       </button>
                       <a
                         href="https://api.whatsapp.com/send?phone=5545998171516&text=Ol%C3%A1,%20tenho%20interesse%20neste%20im%C3%B3vel,%20c%C3%B3digo%20776%20Aguardo%20breve%20o%20contato.%20Obrigado!."
-                        className="button-more_agend"
                       >
-                        agendar visita
+                        <button className="button-more_agend">
+                          agendar visita
+                        </button>
                       </a>
                     </div>
                   </div>

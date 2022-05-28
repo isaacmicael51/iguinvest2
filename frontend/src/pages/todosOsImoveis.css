@@ -5,6 +5,9 @@
     margin: 2em;
 }
 .container-filtros-all {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: 2em 0 0 0;
 }
 .tipos-filtro {
