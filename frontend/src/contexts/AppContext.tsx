@@ -9,7 +9,7 @@ export const AppProvider = ({ children }) => {
     return (
         <AppContext.Provider value={{ setLoading }}>
             {children}
-            {loading && <Ripple background="blur"/>}
+            {loading && <Ripple animation="slide-down"/>}
         </AppContext.Provider>
     )
 }

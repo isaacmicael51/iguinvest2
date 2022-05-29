@@ -17,8 +17,12 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import axios from "axios";
 import { AppContext } from "../contexts/AppContext";
 import { cidadesDisponiveis, tiposdeImoveisDisponiveis, tiposImoveisDisponiveisPorCidade } from "../services/webservice";
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
+  
+  const navigate = useNavigate();
+
   const [filters, setFilters] = React.useState({ open: false, tipo: "", cidade: 1 });
   const [tipos, setTipos] = React.useState([]);
   const [cidades, setCidades] = React.useState([]);
@@ -123,13 +127,14 @@ export function Home() {
           cidades={cidades}
           tipos={tipos}
           imoveisPorCidade={imoveisPorCidade}
+          navigate={navigate}
         />
       }
     </>
   );
 }
 
-const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTipo, tipos, cidades, imoveisPorCidade }) => {
+const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTipo, navigate, cidades, imoveisPorCidade }) => {
   return (
     <Dialog
       fullScreen
@@ -186,7 +191,9 @@ const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTi
           <Grid container>
             <Grid item xs={12}>
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button sx={{
+                <Button
+                 onClick={() => navigate('/todososimoveis', { state: { cidade: filters?.cidade, tipo: filters?.tipo } })}
+                 sx={{
                   color: '#fff',
                   fontSize: '12px',
                   width: '100%',
@@ -204,13 +211,6 @@ const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTi
             </Grid>
           </Grid>
         </Box>
-        {/* <Paper elevation={3}>
-          <Box sx={{ position: 'fixed', bottom: 20, width: '200px', left: '50%', marginLeft: '-50px' }}>
-            <Button autoFocus sx={{ backgroundColor: '#ff0451', color: '#fff' }} onClick={() => setFilters({ ...filters, open: false })}>
-              Buscar
-            </Button>
-          </Box>
-        </Paper> */}
       </Box>
     </Dialog>
   )
