@@ -13,8 +13,8 @@ export function TodosOsImoveis() {
   const [tipos, setTipos] = useState([]);
   const [cidades, setcidades] = useState([]);
   
-  const [tipoSelecionado, setTipoSelecionado] = useState(!!location.state.tipo ? location.state.tipo.codigo : '');
-  const [cidadeSelecionada, setCidadeSelecionada] = useState(!!location.state.cidade ? location.state.cidade.codigo : '');
+  const [tipoSelecionado, setTipoSelecionado] = useState(!!location?.state?.tipo ? location.state.tipo.codigo : '');
+  const [cidadeSelecionada, setCidadeSelecionada] = useState(!!location?.state?.cidade ? location.state.cidade.codigo : '');
   
   const instance = <Loader />;
 
