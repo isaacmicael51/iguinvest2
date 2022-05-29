@@ -45,7 +45,7 @@ function FiltroHome() {
 
   return (
     <>
-      <form className="form_busca__desktop d-none d-md-block">
+      <form className="form_busca__desktop d-none d-lg-block">
         <div className="form-group form_busca__desktop_container">
           <select className="form_busca__inputs ml-4" name="cidade" id="cidade">
             <option>Qual a localização?</option>
