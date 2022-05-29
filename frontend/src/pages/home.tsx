@@ -17,10 +17,11 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import axios from "axios";
 
 export function Home() {
-  const [filters, setFilters] = React.useState({ open: false, tipo: "", cidade: "" });
+  const [filters, setFilters] = React.useState({ open: false, tipo: "", cidade: 1 });
   const [value, setValue] = React.useState('a');
   const [tipos, setTipos] = React.useState([]);
   const [cidades, setCidades] = React.useState([]);
+  const [quantidade, setQuantidade] = React.useState([]);
 
   useEffect(() => {
     axios
@@ -45,14 +46,39 @@ export function Home() {
   }, []);
 
   useEffect(() => {
-    axios.get('https://api.imoview.com.br/Imovel/RetornarTiposImoveisDisponiveis?parametros={"codigoCidade":"34"}').then(response => 
-    console.log(response.data))
-  })
+    getImoveis(filters.cidade, filters.tipo)
+  }, [filters.cidade, filters.tipo])
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
+  async function getImoveis(cidade, tipo) {
+    try {
+       if (cidade && !tipo) {
+        let res = await axios.get(
+          `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/1/0/${cidade}`
+        );
+        setQuantidade(res.data.quantidade);
+      }
+      else {
+        let res = await axios.get(
+          `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/1/${tipo}/${cidade}`
+        );
+        setQuantidade(res.data.quantidade);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleChangeCidade = (event) => {
+    setFilters({...filters, cidade: event.target.value});
   };
 
+  const handleChangeTipo = (event) => {
+    console.log(event.target.value)
+    setFilters({...filters, tipo: event.target.value});
+  };
+
+  console.log(filters)
+  console.log(quantidade)
 
   return (
     <>
@@ -130,8 +156,8 @@ export function Home() {
                   <Box key={`cidades: ${index}`} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Typography sx={{ color: '#222' }}>{cidade.nome}</Typography>
                     <Radio
-                      checked={value === 'a'}
-                      onChange={handleChange}
+                      checked={filters?.cidade == cidade.codigo}
+                      onChange={handleChangeCidade}
                       value={cidade.codigo}
                       name="radio-buttons"
                       sx={{}}
@@ -148,9 +174,9 @@ export function Home() {
                   <Box key={`tipo:${index}`} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Typography sx={{ color: '#222' }}>{tipo.nome}</Typography>
                     <Radio
-                      checked={value === 'a'}
-                      onChange={handleChange}
-                      value="b"
+                      checked={filters?.tipo == tipo.codigo}
+                      onChange={handleChangeTipo}
+                      value={tipo.codigo}
                       name="radio-buttons"
                       sx={{}}
                       icon={<RadioButtonUncheckedIcon style={{ color: "#ff0451" }} />}
@@ -161,7 +187,7 @@ export function Home() {
                 ))}
               </Box>
             </Box>
-            <Box sx={{padding: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed'}}>
+            <Box sx={{position: 'fixed', bottom: 20, width: '200px', left: '50%', marginLeft: '-50px'}}>
               <Button autoFocus sx={{backgroundColor: '#ff0451', color: '#fff'}} onClick={() => setFilters({ ...filters, open: false })}>
                 Buscar
               </Button>
