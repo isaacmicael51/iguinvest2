@@ -1,12 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import axios from "axios";
 import "./cidadesHome.css";
 import { motion, useAnimation } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
-
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import json from "./jsonImgCidades";
 import { Box, CardMedia, IconButton, Paper, Typography } from "@mui/material";
@@ -15,7 +12,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 function CardCidades() {
 
-  const [cidades, setcidades] = useState([]);
+  const [cidades, setCidades] = useState([]);
   const [fotos, setFotos] = useState([]);
 
   const navigate = useNavigate();
@@ -26,21 +23,19 @@ function CardCidades() {
   const [carouselWidth, setCarouselWidth] = useState(0);
 
   useEffect(() => {
-    setCarouselWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
-  }, []);
-
-  useEffect(() => {
     const loadAll = async () => {
       let fotos = await json.getHomeCityList();
       setFotos(fotos);
     };
     loadAll();
   }, []);
+
   useEffect(() => {
     axios
       .get("https://sleepy-bayou-22688.herokuapp.com/api/cidadesdisponiveis")
       .then((response: any) => {
-        setcidades(response.data.lista);
+        setCidades(response.data.lista);
+        setCarouselWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
       })
       .catch(() => {
         console.log("Deu errado");
