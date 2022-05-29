@@ -4,8 +4,6 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 
-import Iconfind from "../pages/assets/icons/Icon-feather-search.svg";
-
 function valuetext(value: number) {
   return `${value}°C`;
 }
@@ -91,11 +89,6 @@ function FiltroHome() {
           </button>
         </div>
       </form>
-            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'}}>
-      <button className="form_busca__mobile d-md-none">
-        Encontre seu imovel <img src={Iconfind} className="icon_find" alt="" />
-      </button>
-      </div>
     </>
   );
 }

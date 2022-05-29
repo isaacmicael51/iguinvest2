@@ -10,6 +10,7 @@ import FiltroHome from "../components/filtroHome";
 import { Dialog, ListItemText, ListItem, List, Divider, AppBar, Toolbar, IconButton, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 // import Youtube from '../components/youtubeVideos';
+import Iconfind from "../pages/assets/icons/Icon-feather-search.svg";
 
 export function Home() {
   const [filters, setFilters] = React.useState({ open: false, tipo: "", cidade: "" });
@@ -22,6 +23,11 @@ export function Home() {
           <h2 className="subtitle-hero">A arte de viver bem</h2>
         </div>
         <FiltroHome />
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+          <button className="form_busca__mobile d-md-none" onClick={() => setFilters({ ...filters, open: true })}>
+            Encontre seu imovel <img src={Iconfind} className="icon_find" alt="" />
+          </button>
+        </div>
       </div>
       <SuperCardsHome />
       <div>
@@ -30,18 +36,18 @@ export function Home() {
         <Container fluid className="container_nossa___historia">
           <Row className="mt-4">
             <Col
-              xs={4}
+              xs={12}
               md={5}
               className="align-content-center row_content_logo__nossa_historia"
             >
               <img
                 src={logo}
                 className="img-fluid logo_nossa__historia"
-                alt=""
+                alt="iguassu invest"
               />
             </Col>
-            <Col xs={8} md={7} className="text_nossa__historia">
-              <h2>Nossa História</h2>
+            <Col xs={12} md={7} className="text_nossa__historia">
+              <h2 style={{ fontSize: '1.8em' }}>Nossa História</h2>
               <p>
                 Lorem ipsum Suspendisse consectetur mi at nisl tristique mollis.
                 Pellentesque tempor quam quis purus tempor, eget facilisis dui
@@ -54,7 +60,7 @@ export function Home() {
         </Container>
         <Container className="youtube_section">
           <Row>
-            <h3>Acompanhe nosso canal no Youtube </h3>
+            <h3 style={{ fontSize: '1.8em' }}>Acompanhe nosso canal no Youtube </h3>
             <div className="embed-responsive embed-responsive-16by9 align-content-center">
               <iframe
                 className="embed-responsive-item"

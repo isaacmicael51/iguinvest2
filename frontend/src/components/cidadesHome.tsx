@@ -70,7 +70,7 @@ function CardCidades() {
 
   return (
     <Container fluid style={{ maxWidht: '1200px' }}>
-      <h2 className="h2">Descubra novas cidades</h2>
+      <h2 className="h2" style={{ fontSize: '1.8em' }}>Descubra novas cidades</h2>
       <Box sx={styles.container}>
         <IconButton sx={styles.button} onClick={onLeftClick}>
           <ArrowBackIosIcon />

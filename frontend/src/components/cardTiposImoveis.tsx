@@ -45,7 +45,7 @@ function CardTiposImoveis() {
   return (
     <>
       <Container>
-        <h2 className="h2">Tipos de Imóveis para você</h2>
+        <h2 className="h2" style={{ fontSize: '1.8em' }}>Tipos de Imóveis para você</h2>
         <ul className="ul_hozintal__scroll">
           {tipos.map((tipo, key) => {
             return (

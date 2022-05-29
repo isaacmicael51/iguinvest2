@@ -49,7 +49,7 @@ function SuperCardsHome() {
   return (
     <>
       <Container>
-        <h2 className="h2">Super Destaque</h2>
+        <h2 className="h2" style={{ fontSize: '1.8em' }}>Super Destaque</h2>
         <Carousel
           responsive={responsive}
           keyBoardControl={false}
