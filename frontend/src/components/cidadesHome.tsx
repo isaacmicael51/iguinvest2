@@ -91,57 +91,56 @@ function CardCidades() {
     return test;
   }).filter(item => item !== undefined);
 
-  console.log(fotosCidades)
-
 
   return (
-    <Container fluid style={{maxWidht: '1200px'}}>
+    <Container fluid style={{ maxWidht: '1200px' }}>
       <h2 className="h2">Descubra novas cidades</h2>
       <Box sx={styles.container}>
-      <IconButton sx={styles.button} onClick={onLeftClick}>
-        <ArrowBackIosIcon />
-      </IconButton>
-      <Box sx={styles.mobileStoriesContainer} ref={carousel}>
-        <motion.div
-          drag="x"
-          animate={animation}
-          onUpdate={onUpdate}
-          dragDirectionLock
-          transition={{ duration: 0.85 }}
-          dragConstraints={{ right: 0, left: -carouselWidth }}
-          whileTap={{ cursor: "grabbing" }}
-          style={{
-            display: "flex",
-            "&:active": {
-              cursor: "grabbing",
-            },
-          }}
-        >
-          {!!fotosCidades && fotosCidades.map((foto, key) =>
-            <Paper
-              elevation={4}
-              sx={styles.paperContainer}
-              key={`foto${key}`}
-            >
-              <CardMedia
-                component="img"
-                height="auto"
-                image={foto.url}
-                alt={`${foto.name}`}
-                sx={styles.image}
-              />
-              <Box sx={styles.textContainer}>
-                <Typography style={{ fontSize: 16, color: '#222', fontFamily: 'Montserrat'}}>
-                  {foto.name}
-                </Typography>
-              </Box>
-            </Paper>
-          )}
-        </motion.div>
-      </Box>
-      <IconButton sx={styles.button} onClick={onRightClick}>
-        <ArrowForwardIosIcon />
-      </IconButton>
+        <IconButton sx={styles.button} onClick={onLeftClick}>
+          <ArrowBackIosIcon />
+        </IconButton>
+        <Box sx={styles.mobileStoriesContainer} ref={carousel}>
+          <motion.div
+            drag="x"
+            animate={animation}
+            onUpdate={onUpdate}
+            dragDirectionLock
+            transition={{ duration: 0.85 }}
+            dragConstraints={{ right: 0, left: -carouselWidth }}
+            whileTap={{ cursor: "grabbing" }}
+            style={{
+              display: "flex",
+              "&:active": {
+                cursor: "grabbing",
+              },
+            }}
+          >
+            {!!fotosCidades && fotosCidades.map((foto, key) =>
+              <Paper
+                elevation={4}
+                sx={styles.paperContainer}
+                key={`foto${key}`}
+                onClick={() => navigate('/todososimoveis', { state: { foto } })}
+              >
+                <CardMedia
+                  component="img"
+                  height="auto"
+                  image={foto.url}
+                  alt={`${foto.name}`}
+                  sx={styles.image}
+                />
+                <Box sx={styles.textContainer}>
+                  <Typography style={{ fontSize: 16, color: '#222', fontFamily: 'Montserrat' }}>
+                    {foto.name}
+                  </Typography>
+                </Box>
+              </Paper>
+            )}
+          </motion.div>
+        </Box>
+        <IconButton sx={styles.button} onClick={onRightClick}>
+          <ArrowForwardIosIcon />
+        </IconButton>
       </Box>
     </Container>
   );

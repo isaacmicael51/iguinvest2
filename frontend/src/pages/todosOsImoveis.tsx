@@ -9,19 +9,15 @@ import { useLocation } from "react-router-dom";
 export function TodosOsImoveis() {
   
   const location = useLocation()
-  console.log(location)
 
   const [tipos, setTipos] = useState([]);
   const [cidades, setcidades] = useState([]);
 
-  const [tipoSelecionado, setTipoSelecionado] = useState(location.state.tipo.codigo || '');
-  const [cidadeSelecionada, setCidadeSelecionada] = useState(String);
+  const [tipoSelecionado, setTipoSelecionado] = useState(location.state.tipo ? location.state.tipo.codigo : '');
+  const [cidadeSelecionada, setCidadeSelecionada] = useState(location.state.foto ? location.state.foto.codigo : '');
 
   const instance = <Loader />;
 
-
-
-  //BUSCA CIDADES E TIPOS DEIMOVEIS DISPONIVEIS
   useEffect(() => {
     axios
       .get("https://sleepy-bayou-22688.herokuapp.com/api/tiposdeimoveisdisponiveis")
