@@ -7,10 +7,12 @@ import CardTiposImoveis from "../components/cardTiposImoveis";
 import CardCidades from "../components/cidadesHome";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import FiltroHome from "../components/filtroHome";
-import { Divider } from "@mui/material";
+import { Dialog, ListItemText, ListItem, List, Divider, AppBar, Toolbar, IconButton, Typography } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 // import Youtube from '../components/youtubeVideos';
 
 export function Home() {
+  const [filters, setFilters] = React.useState({ open: false, tipo: "", cidade: "" });
   return (
     <>
       <div className="hero">
@@ -63,10 +65,48 @@ export function Home() {
 
           <Row>
             <h3 className="mt-3">Aqui vão vir as publicações do Instagram</h3>
-            
+
           </Row>
         </Container>
       </div>
+      {filters.open &&
+        <Dialog
+          fullScreen
+          open={filters.open}
+          onClose={() => setFilters({ ...filters, open: false })}
+        >
+          <AppBar sx={{ position: 'relative' }}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={() => setFilters({ ...filters, open: false })}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                Sound
+              </Typography>
+              <Button autoFocus color="inherit" onClick={() => setFilters({ ...filters, open: false })}>
+                save
+              </Button>
+            </Toolbar>
+          </AppBar>
+          <List>
+            <ListItem button>
+              <ListItemText primary="Phone ringtone" secondary="Titania" />
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemText
+                primary="Default notification ringtone"
+                secondary="Tethys"
+              />
+            </ListItem>
+          </List>
+        </Dialog>
+      }
     </>
   );
 }
