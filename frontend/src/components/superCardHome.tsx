@@ -59,7 +59,6 @@ function SuperCardsHome() {
         >
           {imoveis.map((imoveis, key) => {
             return (
-              <>
                 <div className="carousel-super-destaque" key={key}>
                   <div className="card-imoveis">
                     <div
@@ -134,7 +133,6 @@ function SuperCardsHome() {
                     </div>
                   </div>
                 </div>
-              </>
             );
           })}
         </Carousel>

@@ -1,19 +1,59 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./home.css";
 import logo from "./assets/logo.svg";
 // import '../getImoveisHome';
 import SuperCardsHome from "../components/superCardHome";
 import CardTiposImoveis from "../components/cardTiposImoveis";
 import CardCidades from "../components/cidadesHome";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import FiltroHome from "../components/filtroHome";
-import { Dialog, ListItemText, ListItem, List, Divider, AppBar, Toolbar, IconButton, Typography } from "@mui/material";
+import { Dialog, Typography, Box, Grid, Radio, Button } from "@mui/material";
+import Image from 'mui-image'
 import CloseIcon from '@mui/icons-material/Close';
 // import Youtube from '../components/youtubeVideos';
 import Iconfind from "../pages/assets/icons/Icon-feather-search.svg";
+import CheckIcon from '@mui/icons-material/Check';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import axios from "axios";
 
 export function Home() {
   const [filters, setFilters] = React.useState({ open: false, tipo: "", cidade: "" });
+  const [value, setValue] = React.useState('a');
+  const [tipos, setTipos] = React.useState([]);
+  const [cidades, setCidades] = React.useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://sleepy-bayou-22688.herokuapp.com/api/tiposdeimoveisdisponiveis")
+      .then((response: any) => {
+        setTipos(response.data.lista);
+      })
+      .catch(() => {
+        console.log("Deu errado");
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("https://sleepy-bayou-22688.herokuapp.com/api/cidadesdisponiveis")
+      .then((response: any) => {
+        setCidades(response.data.lista);
+      })
+      .catch(() => {
+        console.log("Deu errado");
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.get('https://api.imoview.com.br/Imovel/RetornarTiposImoveisDisponiveis?parametros={"codigoCidade":"34"}').then(response => 
+    console.log(response.data))
+  })
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+
   return (
     <>
       <div className="hero">
@@ -33,31 +73,26 @@ export function Home() {
       <div>
         <CardTiposImoveis />
         <CardCidades />
-        <Container fluid className="container_nossa___historia">
-          <Row className="mt-4">
-            <Col
-              xs={12}
-              md={5}
-              className="align-content-center row_content_logo__nossa_historia"
-            >
-              <img
+        <Box sx={{ flexGrow: 1, paddingInline: { xs: '2rem', sm: '3rem', md: '10rem' }, marginBlock: '4rem', paddingBlock: '2rem', backgroundColor: '#f5f5f5' }}>
+          <Grid container justifyContent='center' alignItems='center' spacing={2}>
+            <Grid item xs={12} sm={12} md={6}>
+              <Image
                 src={logo}
-                className="img-fluid logo_nossa__historia"
                 alt="iguassu invest"
+                sx={{
+                  maxWidth: { xs: 200, sm: 200, md: 250 }
+                }}
               />
-            </Col>
-            <Col xs={12} md={7} className="text_nossa__historia">
-              <h2 style={{ fontSize: '1.8em' }}>Nossa História</h2>
-              <p>
-                Lorem ipsum Suspendisse consectetur mi at nisl tristique mollis.
-                Pellentesque tempor quam quis purus tempor, eget facilisis dui
-                iaculis. Nunc nibh arcu, pellentesque eget libero et, dictum
-                tempor elit.
-              </p>
-              <Button className="button-rose">Conheça nossa trajetória </Button>
-            </Col>
-          </Row>
-        </Container>
+            </Grid>
+            <Grid item xs={12} sm={12} md={6}>
+              <Box>
+                <Typography sx={{ fontSize: '2.2em', color: '#212529', marginBlock: 2, textAlign: { xs: 'center', sm: 'center', md: 'start' } }}>Nossa História</Typography>
+                <Typography sx={{ fontSize: 16, color: '#212529', textAlign: { xs: 'center', sm: 'center', md: 'start' } }}> Lorem ipsum Suspendisse consectetur mi at nisl tristique mollis. Pellentesque tempor quam quis purus tempor, eget facilisis dui iaculis. Nunc nibh arcu, pellentesque eget libero et, dictum tempor elit.
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
         <Container className="youtube_section">
           <Row>
             <h3 style={{ fontSize: '1.8em' }}>Acompanhe nosso canal no Youtube </h3>
@@ -74,43 +109,64 @@ export function Home() {
 
           </Row>
         </Container>
-      </div>
+      </div >
       {filters.open &&
         <Dialog
           fullScreen
           open={filters.open}
           onClose={() => setFilters({ ...filters, open: false })}
+          sx={{ width: '100%' }}
+          PaperProps={{
+            style: {
+              backgroundImage: `linear-gradient(to right, #ff0451, #812240)`
+            },
+          }}
         >
-          <AppBar sx={{ position: 'relative' }}>
-            <Toolbar>
-              <IconButton
-                edge="start"
-                color="inherit"
-                onClick={() => setFilters({ ...filters, open: false })}
-                aria-label="close"
-              >
-                <CloseIcon />
-              </IconButton>
-              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                Sound
-              </Typography>
-              <Button autoFocus color="inherit" onClick={() => setFilters({ ...filters, open: false })}>
-                save
+          <Box sx={{ backgroundColor: '#fff', height: 'auto', marginTop: '40px', borderTopLeftRadius: '25px', borderTopRightRadius: '25px' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 4 }}>
+              <Typography variant="h6">Escolha a cidade do seu imóvel</Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', marginTop: 3 }}>
+                {cidades.map((cidade: any, index) => (
+                  <Box key={`cidades: ${index}`} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Typography sx={{ color: '#222' }}>{cidade.nome}</Typography>
+                    <Radio
+                      checked={value === 'a'}
+                      onChange={handleChange}
+                      value={cidade.codigo}
+                      name="radio-buttons"
+                      sx={{}}
+                      icon={<RadioButtonUncheckedIcon style={{ color: "#ff0451" }} />}
+                      checkedIcon={<CheckIcon style={{ color: "#ff0451", border: '2px solid #ff0451', borderRadius: '50%' }} />}
+                      inputProps={{ 'aria-label': 'A' }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+              <Typography variant="h6" sx={{ marginTop: 2 }}>Escolha o tipo de imóvel</Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', marginTop: 3 }}>
+                {tipos.map((tipo: any, index) => (
+                  <Box key={`tipo:${index}`} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Typography sx={{ color: '#222' }}>{tipo.nome}</Typography>
+                    <Radio
+                      checked={value === 'a'}
+                      onChange={handleChange}
+                      value="b"
+                      name="radio-buttons"
+                      sx={{}}
+                      icon={<RadioButtonUncheckedIcon style={{ color: "#ff0451" }} />}
+                      checkedIcon={<CheckIcon style={{ color: "#ff0451", border: '2px solid #ff0451', borderRadius: '50%' }} />}
+                      inputProps={{ 'aria-label': 'A' }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+            <Box sx={{padding: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'fixed'}}>
+              <Button autoFocus sx={{backgroundColor: '#ff0451', color: '#fff'}} onClick={() => setFilters({ ...filters, open: false })}>
+                Buscar
               </Button>
-            </Toolbar>
-          </AppBar>
-          <List>
-            <ListItem button>
-              <ListItemText primary="Phone ringtone" secondary="Titania" />
-            </ListItem>
-            <Divider />
-            <ListItem button>
-              <ListItemText
-                primary="Default notification ringtone"
-                secondary="Tethys"
-              />
-            </ListItem>
-          </List>
+            </Box>
+          </Box>
         </Dialog>
       }
     </>
