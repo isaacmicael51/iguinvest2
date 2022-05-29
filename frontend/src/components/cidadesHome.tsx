@@ -67,7 +67,6 @@ function CardCidades() {
     return test;
   }).filter(item => item !== undefined);
 
-
   return (
     <Container fluid style={{ maxWidht: '1200px' }}>
       <h2 className="h2" style={{ fontSize: '1.8em' }}>Descubra novas cidades</h2>
@@ -91,23 +90,23 @@ function CardCidades() {
               },
             }}
           >
-            {!!fotosCidades && fotosCidades.map((foto, key) =>
+            {!!fotosCidades && fotosCidades.map((cidade, key) =>
               <Paper
                 elevation={4}
                 sx={styles.paperContainer}
                 key={`foto${key}`}
-                onClick={() => navigate('/todososimoveis', { state: { foto } })}
+                onClick={() => navigate('/todososimoveis', { state: { cidade } })}
               >
                 <CardMedia
                   component="img"
                   height="auto"
-                  image={foto.url}
-                  alt={`${foto.name}`}
+                  image={cidade.url}
+                  alt={`${cidade.name}`}
                   sx={styles.image}
                 />
                 <Box sx={styles.textContainer}>
                   <Typography style={{ fontSize: 16, color: '#222', fontFamily: 'Montserrat' }}>
-                    {foto.name}
+                    {cidade.name}
                   </Typography>
                 </Box>
               </Paper>
