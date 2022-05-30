@@ -31,14 +31,16 @@ export function Home() {
   const { setLoading } = useContext(AppContext);
 
   useEffect(() => {
+    setLoading(true)
     loadImoveis()
   }, []);
 
   const loadImoveis = async () => {
-    const res = await tiposdeImoveisDisponiveis(setLoading)
+    const res = await tiposdeImoveisDisponiveis()
     setTipos(res.lista);
-    const cidades = await cidadesDisponiveis(setLoading)
+    const cidades = await cidadesDisponiveis()
     setCidades(cidades.lista);
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export function Home() {
 
   const getImoveis = async (cidade) => {
     try {
-      let res = await tiposImoveisDisponiveisPorCidade(setLoading, cidade)
+      let res = await tiposImoveisDisponiveisPorCidade(cidade)
       setImoveisPorCidade(res.lista)
     } catch (error) {
       console.error(error);
