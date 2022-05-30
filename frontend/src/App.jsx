@@ -5,7 +5,7 @@ import { Header } from './components/header';
 import Footer from './components/footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
-import { Loading } from '../src/components/Loading';
+import { Loading } from './components/Loading';
 import { AppContext } from './contexts/AppContext';
 
 function App() {

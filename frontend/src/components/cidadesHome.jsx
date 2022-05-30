@@ -33,7 +33,7 @@ function CardCidades() {
   useEffect(() => {
     axios
       .get("https://sleepy-bayou-22688.herokuapp.com/api/cidadesdisponiveis")
-      .then((response: any) => {
+      .then((response) => {
         setCidades(response.data.lista);
         setCarouselWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
       })

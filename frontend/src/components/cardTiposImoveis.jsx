@@ -35,7 +35,7 @@ function CardTiposImoveis() {
   useEffect(() => {
     axios
       .get("https://sleepy-bayou-22688.herokuapp.com/api/tiposdeimoveisdisponiveis")
-      .then((response: any) => {
+      .then((response) => {
         setTipos(response.data.lista);
       })
       .catch(() => {

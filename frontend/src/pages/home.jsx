@@ -157,7 +157,7 @@ const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTi
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 4, paddingBottom: 60 }}>
           <Typography variant="h6" sx={{ fontFamily: 'Montserrat', fontSize: 18, fontWeight: 600}}>Escolha a cidade do seu imóvel</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', marginTop: 3 }}>
-            {cidades.map((cidade: any, index) => (
+            {cidades.map((cidade, index) => (
               <Box key={`cidades: ${index}`} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography sx={{ color: '#222', fontFamily: 'Montserrat'}}>{cidade.nome}</Typography>
                 <Radio
@@ -175,7 +175,7 @@ const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTi
           </Box>
           <Typography variant="h6" sx={{ fontFamily: 'Montserrat', fontSize: 18, fontWeight: 600, marginTop: 4}}>Escolha o tipo de imóvel</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', marginTop: 1 }}>
-            {imoveisPorCidade.map((tipo: any, index) => (
+            {imoveisPorCidade.map((tipo, index) => (
               <Box key={`tipo:${index}`} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography sx={{ color: '#222',fontFamily: 'Montserrat', padding: 0 }}>{tipo.nome}</Typography>
                 <Radio
