@@ -12,7 +12,7 @@ import IconCar from "../pages/assets/icons/icon-car.svg";
 import IconLocation from "../pages/assets/icons/icon-location-on.svg";
 import IconShower from "../pages/assets/icons/icon-shower.svg";
 import { useNavigate } from "react-router-dom";
-import {AppContext} from '../contexts/AppContext';
+import { AppContext } from '../contexts/AppContext';
 import { Box } from "@mui/material";
 
 function ResultBusca({ cidade, tipo }) {
@@ -63,7 +63,7 @@ function ResultBusca({ cidade, tipo }) {
     } catch (error) {
       console.error(error);
     }
-    
+
     setLoading(false)
   }
 
@@ -105,7 +105,14 @@ function ResultBusca({ cidade, tipo }) {
                       </h3>
                     </div>
                     <div className="card-imoveis_text">
-                      <p>
+                      <p style={{
+                        maxWidth: "100%",
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        WebkitLineClamp: 1,
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}>
                         <img
                           src={IconLocation}
                           className="img-responsive card-imoveis_icon__ubication"
@@ -178,19 +185,19 @@ function ResultBusca({ cidade, tipo }) {
         </Row>
       </Container>
       {quantidade > 20 && (
-      <Container className="mt-3 align-center">
-        <Row>
-          <Box sx={{display: 'flex', justifyContent: 'center'}}>
-            <Stack spacing={2}>
-              <Pagination
-                count={paginas}
-                onChange={handlePagination}
-                shape="rounded"
-              />
-            </Stack>
-          </Box>
-        </Row>
-      </Container>
+        <Container className="mt-3 align-center">
+          <Row>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Stack spacing={2}>
+                <Pagination
+                  count={paginas}
+                  onChange={handlePagination}
+                  shape="rounded"
+                />
+              </Stack>
+            </Box>
+          </Row>
+        </Container>
       )}
     </>
   );

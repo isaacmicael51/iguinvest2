@@ -8,6 +8,7 @@ import { AppContext } from "../contexts/AppContext";
 import { IconButton, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
+import { CurrencyFilter } from "./currencyFilter";
 
 function valuetext(value: number) {
   return `${value}°C`;
