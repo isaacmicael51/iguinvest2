@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -13,9 +13,11 @@ import IconCar from "../pages/assets/icons/icon-car.svg";
 import IconLocation from "../pages/assets/icons/icon-location-on.svg";
 import IconShower from "../pages/assets/icons/icon-shower.svg";
 import { useNavigate } from "react-router-dom";
+import {AppContext} from '../contexts/AppContext';
 
 function ResultBusca({ cidade, tipo }) {
   // pega a quantidade de imoveis e calcula a quatidade de páginas
+  const { setLoading } = useContext(AppContext)
 
   const navigate = useNavigate();
 
@@ -61,9 +63,12 @@ function ResultBusca({ cidade, tipo }) {
     } catch (error) {
       console.error(error);
     }
+    
+    setLoading(false)
   }
 
   useEffect(() => {
+    setLoading(true)
     getImoveis(cidade, tipo, page);
   }, [cidade, tipo]);
 

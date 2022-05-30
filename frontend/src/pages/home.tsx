@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "./home.css";
 import logo from "./assets/logo.svg";
 // import '../getImoveisHome';
@@ -7,7 +7,7 @@ import CardTiposImoveis from "../components/cardTiposImoveis";
 import CardCidades from "../components/cidadesHome";
 import { Row, Col, Container } from "react-bootstrap";
 import FiltroHome from "../components/filtroHome";
-import { Dialog, Typography, Box, Grid, Radio, Button } from "@mui/material";
+import { Dialog, Typography, Box, Grid, Radio, Button, Paper } from "@mui/material";
 import Image from 'mui-image'
 import CloseIcon from '@mui/icons-material/Close';
 // import Youtube from '../components/youtubeVideos';
@@ -15,54 +15,39 @@ import Iconfind from "../pages/assets/icons/Icon-feather-search.svg";
 import CheckIcon from '@mui/icons-material/Check';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import axios from "axios";
+import { AppContext } from "../contexts/AppContext";
+import { cidadesDisponiveis, tiposdeImoveisDisponiveis, tiposImoveisDisponiveisPorCidade } from "../services/webservice";
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
+  
+  const navigate = useNavigate();
+
   const [filters, setFilters] = React.useState({ open: false, tipo: "", cidade: 1 });
-  const [value, setValue] = React.useState('a');
   const [tipos, setTipos] = React.useState([]);
   const [cidades, setCidades] = React.useState([]);
-  const [quantidade, setQuantidade] = React.useState([]);
+  const [imoveisPorCidade, setImoveisPorCidade] = React.useState([]);
+  const { setLoading } = useContext(AppContext);
 
   useEffect(() => {
-    axios
-      .get("https://sleepy-bayou-22688.herokuapp.com/api/tiposdeimoveisdisponiveis")
-      .then((response: any) => {
-        setTipos(response.data.lista);
-      })
-      .catch(() => {
-        console.log("Deu errado");
-      });
+    loadImoveis()
   }, []);
 
-  useEffect(() => {
-    axios
-      .get("https://sleepy-bayou-22688.herokuapp.com/api/cidadesdisponiveis")
-      .then((response: any) => {
-        setCidades(response.data.lista);
-      })
-      .catch(() => {
-        console.log("Deu errado");
-      });
-  }, []);
+  const loadImoveis = async () => {
+    const res = await tiposdeImoveisDisponiveis(setLoading)
+    setTipos(res.lista);
+    const cidades = await cidadesDisponiveis(setLoading)
+    setCidades(cidades.lista);
+  }
 
   useEffect(() => {
     getImoveis(filters.cidade, filters.tipo)
   }, [filters.cidade, filters.tipo])
 
-  async function getImoveis(cidade, tipo) {
+  const getImoveis = async (cidade) => {
     try {
-      if (cidade && !tipo) {
-        let res = await axios.get(
-          `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/1/0/${cidade}`
-        );
-        setQuantidade(res.data.quantidade);
-      }
-      else {
-        let res = await axios.get(
-          `https://sleepy-bayou-22688.herokuapp.com/api/imoveisDisponiveis/1/${tipo}/${cidade}`
-        );
-        setQuantidade(res.data.quantidade);
-      }
+      let res = await tiposImoveisDisponiveisPorCidade(setLoading, cidade)
+      setImoveisPorCidade(res.lista)
     } catch (error) {
       console.error(error);
     }
@@ -76,9 +61,6 @@ export function Home() {
     console.log(event.target.value)
     setFilters({ ...filters, tipo: event.target.value });
   };
-
-  console.log(filters)
-  console.log(quantidade)
 
   return (
     <>
@@ -144,27 +126,30 @@ export function Home() {
           handleChangeTipo={handleChangeTipo}
           cidades={cidades}
           tipos={tipos}
+          imoveisPorCidade={imoveisPorCidade}
+          navigate={navigate}
         />
       }
     </>
   );
 }
 
-const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTipo, tipos, cidades }) => {
+const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTipo, navigate, cidades, imoveisPorCidade }) => {
   return (
     <Dialog
       fullScreen
       open={filters.open}
       onClose={() => setFilters({ ...filters, open: false })}
-      sx={{ width: '100%' }}
+      sx={{ width: '100%', display: { xs: 'block', sm: 'block', md: 'none', lg: 'none' }, justifyContent: 'flex-end' }}
       PaperProps={{
         style: {
-          backgroundImage: `linear-gradient(to right, #ff0451, #812240)`
+          backgroundImage: `linear-gradient(to right, #ff0451, #812240)`,
+          justifyContent: 'flex-end',
         },
       }}
     >
-      <Box sx={{ backgroundColor: '#fff', height: 'auto', marginTop: '40px', borderTopLeftRadius: '25px', borderTopRightRadius: '25px' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 4 }}>
+      <Box sx={{ bottom: 0, backgroundColor: '#fff', height: '95%', borderTopLeftRadius: '25px', borderTopRightRadius: '25px' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 4, paddingBottom: 15 }}>
           <Typography variant="h6">Escolha a cidade do seu imóvel</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', marginTop: 3 }}>
             {cidades.map((cidade: any, index) => (
@@ -185,7 +170,7 @@ const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTi
           </Box>
           <Typography variant="h6" sx={{ marginTop: 2 }}>Escolha o tipo de imóvel</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', marginTop: 3 }}>
-            {tipos.map((tipo: any, index) => (
+            {imoveisPorCidade.map((tipo: any, index) => (
               <Box key={`tipo:${index}`} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography sx={{ color: '#222' }}>{tipo.nome}</Typography>
                 <Radio
@@ -202,10 +187,29 @@ const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTi
             ))}
           </Box>
         </Box>
-        <Box sx={{ position: 'fixed', bottom: 20, width: '200px', left: '50%', marginLeft: '-50px' }}>
-          <Button autoFocus sx={{ backgroundColor: '#ff0451', color: '#fff' }} onClick={() => setFilters({ ...filters, open: false })}>
-            Buscar
-          </Button>
+        <Box sx={{ boxShadow: 'rgb(0 0 0 / 12%) 0px -3px 16px', border: '1px solid rgb(221, 221, 221)', height: '80px', position: 'fixed', bottom: 0, background: '#FFF', margin: 0, width: '100%', left: 0, paddingBlock: 2, paddingInline: 1, display: { md: 'none' } }}>
+          <Grid container>
+            <Grid item xs={12}>
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Button
+                 onClick={() => navigate('/todososimoveis', { state: { cidade: filters?.cidade, tipo: filters?.tipo } })}
+                 sx={{
+                  color: '#fff',
+                  fontSize: '12px',
+                  width: '100%',
+                  maxWidth: '220px',
+                  height: '44px',
+                  marginTop: 0,
+                  background: 'linear-gradient(to right, #E61E4D 0%, #E31C5F 50%, #D70466 100%) !important',
+                  '&:  hover': {
+                    background: 'linear-gradient(48deg, rgba(247,58,92,1) 0%, rgba(250,76,103,1) 10%, rgba(254,102,119,1) 97%)',
+                  }
+                }}>
+                  Buscar
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Dialog>
