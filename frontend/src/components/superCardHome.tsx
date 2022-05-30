@@ -3,6 +3,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import "./superCardHome.css";
 
+import { useNavigate } from "react-router-dom";
+
+
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -14,6 +17,8 @@ import IconLocation from "../pages/assets/icons/icon-location-on.svg";
 import IconShower from "../pages/assets/icons/icon-shower.svg";
 
 function SuperCardsHome() {
+
+  const navigate = useNavigate();
 
   const responsive = {
     superLargeDesktop: {
@@ -27,7 +32,7 @@ function SuperCardsHome() {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 1
+      items: 2
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -46,6 +51,12 @@ function SuperCardsHome() {
         console.log("Deu errado");
       });
   }, []);
+
+  function handleDetails(imovel: any) {
+    console.log(imovel)
+    navigate(`/todososimoveis/${imovel.codigo}`, { state: imovel });
+  }
+
   return (
     <>
       <Container>
@@ -57,82 +68,89 @@ function SuperCardsHome() {
           arrows={true}
           autoPlay={true}
         >
-          {imoveis.map((imoveis, key) => {
+          {imoveis.map((imovel, key) => {
             return (
-                <div className="carousel-super-destaque" key={key}>
-                  <div className="card-imoveis">
-                    <div
-                      className="card-imoveis_img__top"
-                      style={{
-                        backgroundImage: `url(${imoveis.urlfotoprincipal})`,
-                      }}
-                    ></div>
-                    <div className="card-imoveis_body">
-                      <div className="card-imoveis_body_title">
-                        <h3 className="card-imoveis_card__title">
-                          {imoveis.titulo}
-                        </h3>
-                      </div>
-                      <div className="card-imoveis_text">
+              <Col xs="12" sm="12" md="12" lg="12" className="mt-4" key={`imovel:${key}`}>
+              <div className="carousel-super-destaque">
+                <div className="card-imoveis">
+                  <div
+                    className="card-imoveis_img__top"
+                    style={{
+                      backgroundImage: `url(${imovel.urlfotoprincipal})`,
+                    }}
+                  ></div>
+                  <div className="card-imoveis_body">
+                    <div className="card-imoveis_body_title">
+                      <h3 className="card-imoveis_card__title">
+                        {imovel.titulo}
+                      </h3>
+                    </div>
+                    <div className="card-imoveis_text">
+                      <p>
+                        <img
+                          src={IconLocation}
+                          className="img-responsive card-imoveis_icon__ubication"
+                        />
+                        {imovel.endereco}
+                      </p>
+                      <p>
+                        <img
+                          src={IconShower}
+                          className="card-imoveis_icon__left img-responsive"
+                        />
+                        {imovel.numerobanhos} banheiros
+                        <img
+                          src={IconShower}
+                          className="card-imoveis_icon__shower img-responsive"
+                        />
+                        {imovel.numerosuites} suites
+                        <img
+                          src={IconBed}
+                          className="card-imoveis_icon__bed img-responsive"
+                        />
+                        {imovel.numeroquartos} quartos
+                      </p>
+                      <div className="card-imoveis_area">
                         <p>
                           <img
-                            src={IconLocation}
-                            className="img-responsive card-imoveis_icon__ubication"
-                          />
-                          {imoveis.endereco}
-                        </p>
-                        <p>
-                          <img
-                            src={IconShower}
+                            src={IconCar}
                             className="card-imoveis_icon__left img-responsive"
                           />
-                          {imoveis.numerobanhos} banheiros
+                          {imovel.numerovagas} vagas
                           <img
-                            src={IconShower}
+                            src={iconArea}
                             className="card-imoveis_icon__shower img-responsive"
                           />
-                          {imoveis.numerosuites}  suites
+                          {imovel.arealote} m² de lote
                           <img
-                            src={IconBed}
+                            src={iconArea}
                             className="card-imoveis_icon__bed img-responsive"
                           />
-                          {imoveis.numeroquartos}  quartos
+                          {imovel.areaprincipal} m² construção
                         </p>
-                        <div className="card-imoveis_area">
-                          <p>
-                            <img
-                              src={IconCar}
-                              className="card-imoveis_icon__left img-responsive"
-                            />
-                            {imoveis.numerovagas} vagas
-                            <img
-                              src={iconArea}
-                              className="card-imoveis_icon__shower img-responsive"
-                            />
-                            {imoveis.arealote} m² de lote
-                            <img
-                              src={iconArea}
-                              className="card-imoveis_icon__bed img-responsive"
-                            />
-                            {imoveis.areaprincipal} m² construção
-                          </p>
-                        </div>
                       </div>
-                      <div style={{ marginTop: 20, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <button className="button-more_info">
-                          mais detalhes
-                        </button>
-                        <a
-                          href="https://api.whatsapp.com/send?phone=5545998171516&text=Ol%C3%A1,%20tenho%20interesse%20neste%20im%C3%B3vel,%20c%C3%B3digo%20776%20Aguardo%20breve%20o%20contato.%20Obrigado!."
-                        >
-                          <button className="button-more_agend">
+                    </div>
+                    <div style={{ marginTop: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <button
+                        className="button-more_info"
+                        onClick={() => handleDetails(imovel)}
+                      >
+                        mais detalhes
+                      </button>
+                      <div style={{ width: 10 }} />
+                      <a
+                        href="https://api.whatsapp.com/send?phone=5545998171516&text=Ol%C3%A1,%20tenho%20interesse%20neste%20im%C3%B3vel,%20c%C3%B3digo%20776%20Aguardo%20breve%20o%20contato.%20Obrigado!."
+                        style={{ width: '100%', maxWidth: '170px' }}
+                      >
+                        <button className="button-more_agend" style={{ width: '100%', maxWidth: '170px' }}>
                           agendar visita
-                          </button>
-                        </a>
-                      </div>
+                        </button>
+                      </a>
                     </div>
                   </div>
                 </div>
+              </div>
+            </Col>
             );
           })}
         </Carousel>

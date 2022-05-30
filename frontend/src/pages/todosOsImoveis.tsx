@@ -39,8 +39,8 @@ export function TodosOsImoveis() {
       <Container className="filter-all">
         <Row>
           <Col>
-            <form action="#" className="container-filtros-all">
-              <select className="tipos-filtro" onChange={(e) => setCidadeSelecionada(e.target.value)} value={cidadeSelecionada}>
+            <form action="#" style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 3}}>
+              <select style={{width: '48%' ,padding: '8px 10px', height: '40px', margin: '8px!important', borderRadius: '6px', border: '1px solid rgb(222, 222, 222'}} onChange={(e) => setCidadeSelecionada(e.target.value)} value={cidadeSelecionada}>
                 <option>Cidade</option>
                 {cidades.map((cidade, key) => {
                   return (
@@ -50,7 +50,7 @@ export function TodosOsImoveis() {
                   );
                 })}
               </select>
-              <select className="tipos-filtro" onChange={(e) => setTipoSelecionado(e.target.value)} value={tipoSelecionado}>
+              <select style={{width: '48%' ,padding: '8px 10px', height: '40px', margin: '8px!important', borderRadius: '6px', border: '1px solid rgb(222, 222, 222'}} onChange={(e) => setTipoSelecionado(e.target.value)} value={tipoSelecionado}>
                 <option>Tipo de imóvel</option>
                 {tipos.map((tipo, key) => {
                   return (
@@ -60,8 +60,8 @@ export function TodosOsImoveis() {
                   );
                 })}
               </select>
-              <input className="tipos-filtro" name="valorMinimo" type="number" placeholder="Valor Minimo" />
-              <input className="tipos-filtro" name="valorMaximo" type="number" placeholder="Valor Maximo" />
+              <input style={{width: '48%' ,padding: '8px 10px', height: '40px', margin: '8px!important', borderRadius: '6px', border: '1px solid rgb(222, 222, 222'}} name="valorMinimo" type="number" placeholder="Valor Minimo" />
+              <input style={{width: '48%' ,padding: '8px 10px', height: '40px', margin: '8px!important', borderRadius: '6px', border: '1px solid rgb(222, 222, 222'}} name="valorMaximo" type="number" placeholder="Valor Maximo" />
             </form>
           </Col>
         </Row>

@@ -1,18 +1,20 @@
-.filter-all {
+/* .filter-all {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 2em;
+    gap: 3px
 }
 .container-filtros-all {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin: 2em 0 0 0;
+    justify-content: center;
 }
 .tipos-filtro {
     padding: 8px 10px;
-    height: 32px;
+    height: 36px!important;
     margin: 2px!important;
     border-radius: 6px;
     border: 1px solid rgb(222, 222, 222);
@@ -20,4 +22,4 @@
 .MuiPagination-root {
     display: flex;
     justify-content: center;
-}
+} */

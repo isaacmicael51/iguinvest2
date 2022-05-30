@@ -1,16 +1,17 @@
 .form_busca__desktop_container {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-content: space-around;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   padding: 0 2em;
 }
 
 .form_busca__desktop {
-  width: 920.79px;
-  height: 68px;
+  max-width: 1200px;
+  width: 100%;
+  height: auto;
   border-radius: 22px;
   background: transparent;
   box-shadow: 0px 5px 11px rgba(0, 0, 0, 0.15);
@@ -136,8 +137,9 @@ input[type="range"]::-moz-range-thumb {
 
 .tipos-filtro {
   padding: 8px 10px;
-  height: 32px;
+  height: 36px;
   margin: 2px!important;
   border-radius: 6px;
   border: 1px solid rgb(222, 222, 222);
+  max-width: 160px;
 }
