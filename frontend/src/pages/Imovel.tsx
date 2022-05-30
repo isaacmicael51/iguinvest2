@@ -9,6 +9,8 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 
 
+
+
 import iconArea from "../pages/assets/icons/icon-area-1.svg";
 import iconAreaExt from "../pages/assets/icons/icon-area-2.svg";
 import IconBed from "../pages/assets/icons/icon-bed.svg";
@@ -16,6 +18,7 @@ import IconCar from "../pages/assets/icons/icon-car.svg";
 import IconLocation from "../pages/assets/icons/icon-location-on.svg";
 import IconShower from "../pages/assets/icons/icon-shower.svg";
 import { GridOn } from '@mui/icons-material';
+import GoogleMaps from '../components/googleMaps';
 
 
 export function Imovel(props) {
@@ -32,13 +35,14 @@ export function Imovel(props) {
     const [imovel, setImovel] = useState(location.state ? location.state : {});
 
     useEffect(() => {
-        axios.get(`https://api.imoview.com.br/Imovel/RetornarDetalhesImovelDisponivel?codigoImovel=${params}`).then(response => {
+        axios.get(`https://sleepy-bayou-22688.herokuapp.com/api/detalheImovel/`).then(response => {
             let data = response.data.lista.filter(imv => imv.codigo == params.id)[0];
             console.log(data);
             setImovel(data);
         })
     }, []) 
-
+        const latitude = imovel.latitude;
+        const longitude = imovel.longitude;
     return (
         <>
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', padding: {xs: 1, md: 0}}}>
@@ -171,7 +175,7 @@ export function Imovel(props) {
                        </Grid>
                        <Grid item xs={12} md={4}>
 
-                            <Box sx={{boxShadow: 'rgb(0 0 0 / 12%) 0px -3px 16px', border: '1px solid rgb(221, 221, 221)', height: '80px', position: 'fixed', bottom: 0, background: '#FFF', margin: 0, width: '100%', left: 0, paddingBlock: 2, paddingInline:1, display: {md: 'none'}}}>
+                            <Box sx={{boxShadow: 'rgb(0 0 0 / 12%) 0px -3px 16px', border: '1px solid rgb(221, 221, 221)', height: '80px', position: 'fixed', bottom: 0, background: '#FFF', margin: 0, width: '100%', left: 0, paddingBlock: 2, paddingInline:1, display: {md: 'none'}, zIndex: 1}}>
                                 <Grid container>
                                     <Grid item xs={7}>
                                         <Typography sx={{color: '#222222', fontFamily: 'Montserrat', fontWeight: 600, fontSize: 18}}>Valor: {imovel.valor}</Typography>                
@@ -212,7 +216,11 @@ export function Imovel(props) {
                                             }
                                             }}>Entrar em contato</Button>
                                     </Link>
-                           </Box>                            
+                           </Box>  
+
+                           <GoogleMaps latitude={latitude} longitude={longitude}/>
+
+
                        </Grid>
                    </Grid>
                 </Box>
@@ -272,3 +280,4 @@ const Carousel = ({ data, open, handleClose, currentImage, setCurrentImage }) =>
         </Dialog>
     )
 }
+
