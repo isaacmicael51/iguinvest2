@@ -10,6 +10,7 @@ import { cidadesDisponiveis, tiposdeImoveisDisponiveis } from "../services/webse
 export function TodosOsImoveis() {
 
   const location = useLocation();
+  console.log(location)
   const { setLoading } = useContext(AppContext)
   
   const [tipos, setTipos] = useState([]);

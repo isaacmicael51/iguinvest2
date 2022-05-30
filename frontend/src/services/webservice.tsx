@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const tiposImoveisDisponiveisPorCidade = async (setLoading, cidade) => {
+export const tiposImoveisDisponiveisPorCidade = async (cidade) => {
     try {
         const response = await axios.get(`https://sleepy-bayou-22688.herokuapp.com/api/tiposdeimoveisdisponiveis/${cidade}`);
         return response.data
@@ -9,26 +9,20 @@ export const tiposImoveisDisponiveisPorCidade = async (setLoading, cidade) => {
     }
 }
 
-export const cidadesDisponiveis = async (setLoading) => {
+export const cidadesDisponiveis = async () => {
     try {
-        setLoading(true)
         const response = await axios.get('https://sleepy-bayou-22688.herokuapp.com/api/cidadesdisponiveis');
-        setLoading(false)
         return response.data
     } catch (error) {
-        setLoading(false)
         console.log(error)
     }
 }
 
-export const tiposdeImoveisDisponiveis = async (setLoading) => {
+export const tiposdeImoveisDisponiveis = async () => {
     try {
-        setLoading(true)
         const response = await axios.get('https://sleepy-bayou-22688.herokuapp.com/api/tiposdeimoveisdisponiveis');
-        setLoading(false)
         return response.data
     } catch (error) {
-        setLoading(false)
         console.log(error)
     }
 }
