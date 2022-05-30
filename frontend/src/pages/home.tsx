@@ -7,7 +7,7 @@ import CardTiposImoveis from "../components/cardTiposImoveis";
 import CardCidades from "../components/cidadesHome";
 import { Row, Col, Container } from "react-bootstrap";
 import FiltroHome from "../components/filtroHome";
-import { Dialog, Typography, Box, Grid, Radio, Button, Paper } from "@mui/material";
+import { Dialog, Typography, Box, Grid, Radio, Button, Paper, IconButton } from "@mui/material";
 import Image from 'mui-image'
 import CloseIcon from '@mui/icons-material/Close';
 // import Youtube from '../components/youtubeVideos';
@@ -20,7 +20,7 @@ import { cidadesDisponiveis, tiposdeImoveisDisponiveis, tiposImoveisDisponiveisP
 import { useNavigate } from "react-router-dom";
 
 export function Home() {
-  
+
   const navigate = useNavigate();
 
   const [filters, setFilters] = React.useState({ open: false, tipo: "", cidade: 1 });
@@ -144,12 +144,11 @@ const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTi
       PaperProps={{
         style: {
           backgroundImage: `linear-gradient(to right, #ff0451, #812240)`,
-          justifyContent: 'flex-end',
         },
       }}
     >
-      <Box sx={{ bottom: 0, backgroundColor: '#fff', height: '95%', borderTopLeftRadius: '25px', borderTopRightRadius: '25px' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 4, paddingBottom: 15 }}>
+      <Box sx={{ backgroundColor: '#fff', borderTopLeftRadius: '25px', borderTopRightRadius: '25px', marginTop: 6 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 4, paddingBottom: 60 }}>
           <Typography variant="h6">Escolha a cidade do seu imóvel</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', marginTop: 3 }}>
             {cidades.map((cidade: any, index) => (
@@ -192,25 +191,30 @@ const FiltrosMobile = ({ filters, setFilters, handleChangeCidade, handleChangeTi
             <Grid item xs={12}>
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Button
-                 onClick={() => navigate('/todososimoveis', { state: { cidade: filters?.cidade, tipo: filters?.tipo } })}
-                 sx={{
-                  color: '#fff',
-                  fontSize: '12px',
-                  width: '100%',
-                  maxWidth: '220px',
-                  height: '44px',
-                  marginTop: 0,
-                  background: 'linear-gradient(to right, #E61E4D 0%, #E31C5F 50%, #D70466 100%) !important',
-                  '&:  hover': {
-                    background: 'linear-gradient(48deg, rgba(247,58,92,1) 0%, rgba(250,76,103,1) 10%, rgba(254,102,119,1) 97%)',
-                  }
-                }}>
+                  onClick={() => navigate('/todososimoveis', { state: { cidade: { codigo: filters?.cidade }, tipo: { codigo: filters?.tipo } } })}
+                  sx={{
+                    color: '#fff',
+                    fontSize: '12px',
+                    width: '100%',
+                    maxWidth: '220px',
+                    height: '44px',
+                    marginTop: 0,
+                    background: 'linear-gradient(to right, #E61E4D 0%, #E31C5F 50%, #D70466 100%) !important',
+                    '&:  hover': {
+                      background: 'linear-gradient(48deg, rgba(247,58,92,1) 0%, rgba(250,76,103,1) 10%, rgba(254,102,119,1) 97%)',
+                    }
+                  }}>
                   Buscar
                 </Button>
               </Box>
             </Grid>
           </Grid>
         </Box>
+      </Box>
+      <Box sx={{position: 'absolute', top: 5, right: 5}}>
+        <IconButton onClick={() => setFilters({ ...filters, open: false })}>
+          <CloseIcon style={{ color: '#ccc' }} />
+        </IconButton>
       </Box>
     </Dialog>
   )
