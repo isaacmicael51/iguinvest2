@@ -5,6 +5,7 @@ import axios from "axios";
 import ResultBusca from "../components/resultBusca";
 import { useLocation } from "react-router-dom";
 import {AppContext} from '../contexts/AppContext';
+import { cidadesDisponiveis, tiposdeImoveisDisponiveis } from "../services/webservice";
 
 export function TodosOsImoveis() {
 
@@ -12,43 +13,24 @@ export function TodosOsImoveis() {
   const { setLoading } = useContext(AppContext)
   
   const [tipos, setTipos] = useState([]);
-  const [cidades, setcidades] = useState([]);
+  const [cidades, setCidades] = useState([]);
   
   const [tipoSelecionado, setTipoSelecionado] = useState(!!location?.state?.tipo ? location.state.tipo.codigo : '');
   const [cidadeSelecionada, setCidadeSelecionada] = useState(!!location?.state?.cidade ? location.state.cidade.codigo : '');
-
 
   useEffect(() => {
     setLoading(true)
     loadData()
   }, [])
-
  
-
-  const loadData = () => { 
-    axios.get("https://sleepy-bayou-22688.herokuapp.com/api/tiposdeimoveisdisponiveis")
-    .then((response: any) => {
-      setTipos(response.data.lista);
-      // setLoading(false)
-    })
-    .catch((res) => {
-      // setLoading(false)
-      console.log("Erro ao carregar tipos de imoveis");
-    });
-
-    axios.get("https://sleepy-bayou-22688.herokuapp.com/api/cidadesdisponiveis")
-      .then((response: any) => {
-        setcidades(response.data.lista);
-        // setLoading(false)
-      })
-      .catch(() => {
-        // setLoading(false)
-        console.log("Erro ao carregar cidades");
-      });
+  const loadData = async () => {
+    const cidades = await cidadesDisponiveis(setLoading)
+    setCidades(cidades.lista);
+    const res = await tiposdeImoveisDisponiveis(setLoading)
+    setTipos(res.lista);
   }
 
   const loadSelectedCity = (e) => {
-
     setCidadeSelecionada(e.target.value)
   }
 

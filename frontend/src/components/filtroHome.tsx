@@ -1,50 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./filtroHome.css";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import { cidadesDisponiveis, tiposdeImoveisDisponiveis } from "../services/webservice";
+import { AppContext } from "../contexts/AppContext";
+import { TextField } from "@mui/material";
 
 function valuetext(value: number) {
   return `${value}°C`;
 }
 
 function FiltroHome() {
-  const [value, setValue] = React.useState<number[]>([20, 37]);
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number[]);
-  };
-
-  const [cidades, setcidades] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://sleepy-bayou-22688.herokuapp.com/api/cidadesdisponiveis")
-      .then((response:any) => {
-        setcidades(response.data.lista);
-      })
-      .catch(() => {
-        console.log("Deu errado");
-      });
-  }, []);
-
+  const { setLoading } = useContext(AppContext);
+  const [cidades, setCidades] = useState([]);
   const [tipos, setTipos] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://sleepy-bayou-22688.herokuapp.com/api/tiposdeimoveisdisponiveis")
-      .then((response:any) => {
-        setTipos(response.data.lista);
 
-      })
-      .catch(() => {
-        console.log("Deu errado");
-      });
-  }, []);
+  useEffect(() => { loadData() }, []);
+
+  const loadData = async () => {
+    const cidades = await cidadesDisponiveis(setLoading)
+    setCidades(cidades.lista);
+    const res = await tiposdeImoveisDisponiveis(setLoading)
+    setTipos(res.lista);
+  }
 
   return (
     <>
-      <form className="form_busca__desktop d-none d-lg-block">
-        <div className="form-group form_busca__desktop_container">
+      <form className="form_busca__desktop d-none d-md-flex d-lg-block">
+        <div className=""  style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', flexWrap: 'wrap'}}>
           <select className="form_busca__inputs ml-4" name="cidade" id="cidade">
             <option>Qual a localização?</option>
             {cidades.map((cidades, key) => {
@@ -70,16 +54,8 @@ function FiltroHome() {
             })}
           </select>
 
-          <Box sx={{ width: 300 }}>
-            <Slider
-              getAriaLabel={() => "Temperature range"}
-              value={value}
-              onChange={handleChange}
-              valueLabelDisplay="auto"
-              getAriaValueText={valuetext}
-            />
-            
-          </Box>
+          <input className="tipos-filtro" name="valorMinimo" type="number" placeholder="Valor Minimo" />
+          <input className="tipos-filtro" name="valorMaximo" type="number" placeholder="Valor Maximo" />
           <button
             className="form_busca__button ml-2"
             type="button"
