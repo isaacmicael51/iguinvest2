@@ -3,7 +3,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
-import "./resultBusca.css";
 
 import iconArea from "../pages/assets/icons/icon-area-1.svg";
 import iconAreaExt from "../pages/assets/icons/icon-area-2.svg";
