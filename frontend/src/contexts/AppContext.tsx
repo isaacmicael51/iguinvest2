@@ -9,7 +9,6 @@ export const AppProvider = ({ children }) => {
     return (
         <AppContext.Provider value={{ setLoading }}>
             {children}
-            {/* {loading && <Ripple/>} */}
         </AppContext.Provider>
     )
 }

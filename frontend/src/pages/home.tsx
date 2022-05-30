@@ -70,7 +70,9 @@ export function Home() {
           <hr className="hr" />
           <h2 className="subtitle-hero">A arte de viver bem</h2>
         </div>
+        <div style={{padding: '20px', paddingTop: 0}}>
         <FiltroHome />
+        </div>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
           <button className="form_busca__mobile d-md-none" onClick={() => setFilters({ ...filters, open: true })}>
             Encontre seu imovel <img src={Iconfind} className="icon_find" alt="" />
