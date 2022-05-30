@@ -1,7 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import "./todosOsimoveis.css";
-import axios from "axios";
 import ResultBusca from "../components/resultBusca";
 import { useLocation } from "react-router-dom";
 import {AppContext} from '../contexts/AppContext';
