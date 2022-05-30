@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-
 import axios from "axios";
 import "./resultBusca.css";
 
@@ -14,6 +13,7 @@ import IconLocation from "../pages/assets/icons/icon-location-on.svg";
 import IconShower from "../pages/assets/icons/icon-shower.svg";
 import { useNavigate } from "react-router-dom";
 import {AppContext} from '../contexts/AppContext';
+import { Box } from "@mui/material";
 
 function ResultBusca({ cidade, tipo }) {
   // pega a quantidade de imoveis e calcula a quatidade de páginas
@@ -180,7 +180,7 @@ function ResultBusca({ cidade, tipo }) {
       {quantidade > 20 && (
       <Container className="mt-3 align-center">
         <Row>
-          <Col>
+          <Box sx={{display: 'flex', justifyContent: 'center'}}>
             <Stack spacing={2}>
               <Pagination
                 count={paginas}
@@ -188,7 +188,7 @@ function ResultBusca({ cidade, tipo }) {
                 shape="rounded"
               />
             </Stack>
-          </Col>
+          </Box>
         </Row>
       </Container>
       )}

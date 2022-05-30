@@ -99,3 +99,9 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
   background: #ff385c; 
 }
+
+@media only screen and (max-width: 800px) {
+  .input_todos_imoveis {
+      width: 48%;   
+  }
+}
